@@ -1,0 +1,3 @@
+include README.md
+include license.txt
+recursive-include reckon_real_estate *.json *.js *.py *.html *.css *.csv *.txt

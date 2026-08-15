@@ -1,0 +1,7 @@
+{
+  "doctype": "Report",
+  "name": "Collection & Overdue",
+  "module": "Reports",
+  "report_type": "Script Report",
+  "is_standard": "Yes"
+}

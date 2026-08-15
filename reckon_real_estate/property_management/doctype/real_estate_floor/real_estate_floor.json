@@ -1,0 +1,74 @@
+{
+  "doctype": "DocType",
+  "name": "Real Estate Floor",
+  "module": "Property Management",
+  "autoname": "field:floor_code",
+  "allow_rename": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "floor_code",
+    "floor_name",
+    "project",
+    "building",
+    "floor_number",
+    "status"
+  ],
+  "fields": [
+    {
+      "fieldname": "floor_code",
+      "fieldtype": "Data",
+      "label": "Floor Code",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "floor_name",
+      "fieldtype": "Data",
+      "label": "Floor Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "project",
+      "fieldtype": "Link",
+      "label": "Project",
+      "reqd": 1,
+      "options": "Real Estate Project"
+    },
+    {
+      "fieldname": "building",
+      "fieldtype": "Link",
+      "label": "Building",
+      "reqd": 1,
+      "options": "Real Estate Building"
+    },
+    {
+      "fieldname": "floor_number",
+      "fieldtype": "Int",
+      "label": "Floor Number",
+      "reqd": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "reqd": 0,
+      "options": "Active\nInactive",
+      "default": "Active"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1
+    }
+  ],
+  "is_submittable": 0,
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "floor_name"
+}
