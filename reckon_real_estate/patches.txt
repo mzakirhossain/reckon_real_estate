@@ -1,0 +1,1 @@
+# Database patches are added here when a released schema requires migration.
