@@ -5,8 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "reckon_real_estate"
 authors = [{name = "Reckon Technologies Ltd."}]
-description = "Real Estate vertical for Frappe/ERPNext"
+description = "Recdkon Real Estate App vertical for Frappe/ERPNext"
 readme = "README.md"
 requires-python = ">=3.10"
-dynamic = ["version"]
+version = "0.0.1"
 dependencies = []
