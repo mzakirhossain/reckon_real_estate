@@ -1,4 +1,4 @@
-Property Management
-Sales
-Collection
-Reports
+Reckon Property Management
+Reckon Sales
+Reckon Collection
+Reckon Reports

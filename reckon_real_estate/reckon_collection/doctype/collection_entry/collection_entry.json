@@ -1,0 +1,136 @@
+{
+  "doctype": "DocType",
+  "name": "Collection Entry",
+  "module": "Reckon Collection",
+  "autoname": "field:collection_no",
+  "allow_rename": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "collection_no",
+    "collection_date",
+    "customer",
+    "project",
+    "unit",
+    "booking",
+    "payment_mode",
+    "reference_no",
+    "amount",
+    "allocations",
+    "allocated_amount",
+    "unallocated_amount",
+    "status",
+    "remarks"
+  ],
+  "fields": [
+    {
+      "fieldname": "collection_no",
+      "fieldtype": "Data",
+      "label": "Collection No",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "collection_date",
+      "fieldtype": "Date",
+      "label": "Collection Date",
+      "reqd": 1,
+      "default": "Today"
+    },
+    {
+      "fieldname": "customer",
+      "fieldtype": "Link",
+      "label": "Customer",
+      "reqd": 1,
+      "options": "Customer"
+    },
+    {
+      "fieldname": "project",
+      "fieldtype": "Link",
+      "label": "Project",
+      "reqd": 1,
+      "options": "Real Estate Project"
+    },
+    {
+      "fieldname": "unit",
+      "fieldtype": "Link",
+      "label": "Unit",
+      "reqd": 1,
+      "options": "Real Estate Unit"
+    },
+    {
+      "fieldname": "booking",
+      "fieldtype": "Link",
+      "label": "Booking",
+      "reqd": 0,
+      "options": "Property Booking"
+    },
+    {
+      "fieldname": "payment_mode",
+      "fieldtype": "Select",
+      "label": "Payment Mode",
+      "reqd": 1,
+      "options": "Cash\nBank Transfer\nCheque\nCard\nMobile Banking\nOther"
+    },
+    {
+      "fieldname": "reference_no",
+      "fieldtype": "Data",
+      "label": "Reference No",
+      "reqd": 0
+    },
+    {
+      "fieldname": "amount",
+      "fieldtype": "Currency",
+      "label": "Amount",
+      "reqd": 1
+    },
+    {
+      "fieldname": "allocations",
+      "fieldtype": "Table",
+      "label": "Payment Allocation",
+      "options": "Payment Allocation"
+    },
+    {
+      "fieldname": "allocated_amount",
+      "fieldtype": "Currency",
+      "label": "Allocated Amount",
+      "reqd": 0,
+      "read_only": 1
+    },
+    {
+      "fieldname": "unallocated_amount",
+      "fieldtype": "Currency",
+      "label": "Unallocated Amount",
+      "reqd": 0,
+      "read_only": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "reqd": 0,
+      "options": "Draft\nSubmitted\nCancelled",
+      "default": "Draft"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Small Text",
+      "label": "Remarks",
+      "reqd": 0
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1
+    }
+  ],
+  "is_submittable": 1,
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "collection_no"
+}

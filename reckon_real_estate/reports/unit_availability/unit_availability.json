@@ -1,7 +1,0 @@
-{
-  "doctype": "Report",
-  "name": "Unit Availability",
-  "module": "Reports",
-  "report_type": "Script Report",
-  "is_standard": "Yes"
-}

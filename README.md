@@ -74,25 +74,32 @@ Release 1 of a Frappe/ERPNext Real Estate vertical.
 - Customer Property Ledger
 - Overdue / unit availability reports
 
-## Target
+## Compatibility
 
-Frappe / ERPNext v15.x
+- Frappe v15 with ERPNext v15
+- Frappe v16 with ERPNext v16
+
+The app verifies that Frappe and ERPNext use the same supported major version
+when it is installed or migrated.
 
 ## Installation
 
 ```bash
 cd ~/frappe-bench
 bench get-app https://github.com/mzakirhossain/reckon_real_estate
-bench --site yoursite install-app reckon_real_estate
-bench --site yoursite migrate
-bench --site yoursite clear-cache
+bash apps/reckon_real_estate/scripts/install.sh yoursite
 ```
 
 If the app is copied into the bench apps directory manually:
 
 ```bash
-bench --site yoursite install-app reckon_real_estate
-bench --site yoursite migrate
+bash apps/reckon_real_estate/scripts/install.sh yoursite
+```
+
+To validate a completed installation:
+
+```bash
+bash apps/reckon_real_estate/scripts/validate_install.sh yoursite
 ```
 
 ## Design principle
