@@ -10,7 +10,7 @@
   "parent_page": "",
   "sequence_id": 1.0,
   "type": "Workspace",
-  "content": "[{\"id\":\"real-estate-header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Real Estate</b></span>\",\"col\":12}},{\"id\":\"property-management-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Property Management\",\"col\":4}},{\"id\":\"sales-collections-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales and Collections\",\"col\":4}},{\"id\":\"reports-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+  "content": "[{\"id\":\"real-estate-header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Real Estate ERP</b></span>\",\"col\":12}},{\"id\":\"property-management-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Property Management\",\"col\":4}},{\"id\":\"sales-collections-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales and Collections\",\"col\":4}},{\"id\":\"construction-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Construction and Accounting\",\"col\":4}},{\"id\":\"management-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Management BI\",\"col\":4}},{\"id\":\"reports-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
   "links": [
     {
       "type": "Card Break",
@@ -145,6 +145,20 @@
       "onboard": 0,
       "is_query_report": 0,
       "dependencies": ""
-    }
+    },
+    {"type":"Card Break","label":"Construction and Accounting","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"BOQ","link_to":"BOQ","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"BOQ Revision","link_to":"BOQ Revision","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Contractor","link_to":"Contractor","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Contractor Work Order","link_to":"Contractor Work Order","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Measurement Sheet","link_to":"Measurement Sheet","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Running Bill","link_to":"Running Bill","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Project Budget","link_to":"Project Budget","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Card Break","label":"Management BI","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Sales Target","link_to":"Sales Target","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Sales Commission","link_to":"Sales Commission","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Budget vs Actual","link_to":"Budget vs Actual","link_type":"Report","hidden":0,"link_count":0,"onboard":0,"is_query_report":1},
+    {"type":"Link","label":"Construction Dashboard","link_to":"Construction Dashboard","link_type":"Report","hidden":0,"link_count":0,"onboard":0,"is_query_report":1},
+    {"type":"Link","label":"Executive Dashboard","link_to":"Executive Dashboard","link_type":"Report","hidden":0,"link_count":0,"onboard":0,"is_query_report":1}
   ]
 }

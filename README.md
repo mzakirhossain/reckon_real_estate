@@ -58,7 +58,26 @@ Property Management Organizations
 The overall objective is to create a complete end-to-end Real Estate ERP solution within the ERPNext/Frappe ecosystem, providing a single platform for property development, sales, customer payment management, construction cost control, accounting, collections, and management reporting.
 # Reckon Real Estate
 
-Release 1 of a Frappe/ERPNext Real Estate vertical.
+Release 2 of a Frappe/ERPNext Real Estate vertical.
+
+## Release 2 — Construction & Accounting
+
+The construction flow is `BOQ → Project Budget → Contractor → Contractor Work
+Order → Measurement Sheet → Running Bill → Purchase Invoice → Payment Entry`.
+The first six stages add construction-domain controls; the final two remain
+native ERPNext accounting documents.
+
+- BOQ and controlled BOQ revisions
+- Contractors mapped one-to-one to ERPNext Supplier
+- Contractor Work Orders that create ERPNext Purchase Orders
+- Quantity-certified Measurement Sheets with over-measurement prevention
+- Retention-aware Running Bills that create ERPNext Purchase Invoices
+- Project Budget and Budget vs Actual (actual GL plus open PO commitments)
+- Sales targets and booking commission accruals
+- Construction cost forecast and Executive Dashboard reports
+
+See [Release 2 architecture](docs/release-2-architecture.md) for the mapping and
+accounting ownership decisions.
 
 ## Release 1 scope
 

@@ -16,6 +16,15 @@ REQUIRED_DOCTYPES = (
     "Installment Schedule",
     "Collection Entry",
     "Payment Allocation",
+    "BOQ",
+    "BOQ Revision",
+    "Contractor",
+    "Contractor Work Order",
+    "Measurement Sheet",
+    "Running Bill",
+    "Project Budget",
+    "Sales Target",
+    "Sales Commission",
 )
 ERPNext_MASTER_DOCTYPES = (
     "Customer",
@@ -23,6 +32,11 @@ ERPNext_MASTER_DOCTYPES = (
     "Project",
     "Cost Center",
     "Item",
+    "Supplier",
+    "Purchase Order",
+    "Purchase Invoice",
+    "Payment Entry",
+    "Budget",
 )
 LEGACY_MODULES = (
     "Reckon Property Management",
