@@ -1,8 +1,9 @@
 {
   "doctype": "DocType",
   "name": "Running Bill Item",
-  "module": "Reckon Real Estate",
-  "istable": 1,
+    "module": "Reckon Real Estate",
+    "istable": 1,
+    "editable_grid": 1,
   "field_order": [
     "item_code",
     "description",

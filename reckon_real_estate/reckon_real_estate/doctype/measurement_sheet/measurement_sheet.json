@@ -6,17 +6,23 @@
   "is_submittable": 1,
   "track_changes": 1,
   "field_order": [
+    "measurement_no",
+    "details_section",
     "work_order",
-    "project",
-    "contractor",
     "measurement_date",
     "period_from",
     "period_to",
+    "details_column",
+    "project",
+    "contractor",
     "status",
-    "items",
-    "total_amount",
     "certified_by",
-    "remarks"
+    "items_section",
+    "items",
+    "totals_section",
+    "total_amount",
+    "remarks",
+    "amended_from"
   ],
   "fields": [
     {
@@ -62,9 +68,10 @@
     {
       "fieldname": "status",
       "fieldtype": "Select",
-      "options": "Draft\nMeasured\nCertified\nRejected",
+      "options": "Draft\nSubmitted\nCancelled",
       "default": "Draft",
-      "label": "Status"
+      "label": "Status",
+      "read_only": 1
     },
     {
       "fieldname": "items",
@@ -89,6 +96,44 @@
       "fieldname": "remarks",
       "fieldtype": "Small Text",
       "label": "Remarks"
+    },
+    {
+      "fieldname": "measurement_no",
+      "label": "Measurement No",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 1,
+      "unique": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "items_section",
+      "label": "Items",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_section",
+      "label": "Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_column",
+      "label": "Details Column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "totals_section",
+      "label": "Totals",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "amended_from",
+      "label": "Amended From",
+      "fieldtype": "Link",
+      "options": "Measurement Sheet",
+      "read_only": 1,
+      "no_copy": 1,
+      "hidden": 1
     }
   ],
   "permissions": [

@@ -1,8 +1,9 @@
 {
   "doctype": "DocType",
   "name": "Project Budget Item",
-  "module": "Reckon Real Estate",
-  "istable": 1,
+    "module": "Reckon Real Estate",
+    "istable": 1,
+    "editable_grid": 1,
   "field_order": [
     "account",
     "cost_center",

@@ -6,18 +6,25 @@
   "is_submittable": 1,
   "track_changes": 1,
   "field_order": [
+    "work_order_no",
+    "details_section",
     "project",
-    "company",
+    "project_budget",
     "contractor",
-    "boq",
     "start_date",
     "end_date",
+    "details_column",
+    "company",
+    "boq",
     "status",
-    "items",
-    "total_amount",
     "retention_percent",
     "purchase_order",
-    "terms"
+    "items_section",
+    "items",
+    "totals_section",
+    "total_amount",
+    "terms",
+    "amended_from"
   ],
   "fields": [
     {
@@ -63,9 +70,10 @@
     {
       "fieldname": "status",
       "fieldtype": "Select",
-      "options": "Draft\nIssued\nIn Progress\nCompleted\nClosed\nCancelled",
+      "options": "Draft\nSubmitted\nCancelled",
       "default": "Draft",
-      "label": "Status"
+      "label": "Status",
+      "read_only": 1
     },
     {
       "fieldname": "items",
@@ -97,6 +105,51 @@
       "fieldname": "terms",
       "fieldtype": "Text Editor",
       "label": "Terms"
+    },
+    {
+      "fieldname": "work_order_no",
+      "label": "Work Order No",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 1,
+      "unique": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "project_budget",
+      "label": "Project Budget",
+      "fieldtype": "Link",
+      "options": "Project Budget",
+      "reqd": 1
+    },
+    {
+      "fieldname": "items_section",
+      "label": "Items",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_section",
+      "label": "Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_column",
+      "label": "Details Column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "totals_section",
+      "label": "Totals",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "amended_from",
+      "label": "Amended From",
+      "fieldtype": "Link",
+      "options": "Contractor Work Order",
+      "read_only": 1,
+      "no_copy": 1,
+      "hidden": 1
     }
   ],
   "permissions": [

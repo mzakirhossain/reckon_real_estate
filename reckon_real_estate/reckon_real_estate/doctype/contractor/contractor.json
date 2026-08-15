@@ -5,15 +5,20 @@
   "autoname": "format:CTR-{#####}",
   "track_changes": 1,
   "field_order": [
+    "contractor_no",
+    "details_section",
     "contractor_name",
     "supplier",
     "contractor_type",
     "tax_id",
+    "details_column",
     "contact_person",
     "phone",
     "email",
     "status",
-    "notes"
+    "notes_section",
+    "notes",
+    "amended_from"
   ],
   "fields": [
     {
@@ -64,15 +69,49 @@
     {
       "fieldname": "status",
       "fieldtype": "Select",
-      "options": "Active\nSuspended\nInactive",
-      "default": "Active",
+      "options": "Draft\nSubmitted\nCancelled",
+      "default": "Draft",
       "in_list_view": 1,
-      "label": "Status"
+      "label": "Status",
+      "read_only": 1
     },
     {
       "fieldname": "notes",
       "fieldtype": "Text Editor",
       "label": "Notes"
+    },
+    {
+      "fieldname": "contractor_no",
+      "label": "Contractor No",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 1,
+      "unique": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "notes_section",
+      "label": "Notes",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_section",
+      "label": "Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_column",
+      "label": "Details Column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "amended_from",
+      "label": "Amended From",
+      "fieldtype": "Link",
+      "options": "Contractor",
+      "read_only": 1,
+      "no_copy": 1,
+      "hidden": 1
     }
   ],
   "permissions": [
@@ -81,8 +120,11 @@
       "read": 1,
       "write": 1,
       "create": 1,
-      "delete": 1
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1
     }
   ],
-  "title_field": "contractor_name"
+  "title_field": "contractor_name",
+  "is_submittable": 1
 }

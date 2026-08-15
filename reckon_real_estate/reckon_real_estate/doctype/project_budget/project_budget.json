@@ -6,15 +6,22 @@
   "is_submittable": 1,
   "track_changes": 1,
   "field_order": [
+    "budget_no",
+    "details_section",
+    "boq",
     "project",
-    "company",
     "fiscal_year",
     "from_date",
+    "details_column",
+    "company",
     "to_date",
     "status",
+    "items_section",
     "items",
+    "totals_section",
     "total_budget",
-    "notes"
+    "notes",
+    "amended_from"
   ],
   "fields": [
     {
@@ -53,9 +60,10 @@
     {
       "fieldname": "status",
       "fieldtype": "Select",
-      "options": "Draft\nApproved\nClosed\nCancelled",
+      "options": "Draft\nSubmitted\nCancelled",
       "default": "Draft",
-      "label": "Status"
+      "label": "Status",
+      "read_only": 1
     },
     {
       "fieldname": "items",
@@ -74,6 +82,51 @@
       "fieldname": "notes",
       "fieldtype": "Text Editor",
       "label": "Notes"
+    },
+    {
+      "fieldname": "budget_no",
+      "label": "Budget No",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 1,
+      "unique": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "boq",
+      "label": "BOQ",
+      "fieldtype": "Link",
+      "options": "BOQ",
+      "reqd": 1
+    },
+    {
+      "fieldname": "items_section",
+      "label": "Items",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_section",
+      "label": "Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_column",
+      "label": "Details Column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "totals_section",
+      "label": "Totals",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "amended_from",
+      "label": "Amended From",
+      "fieldtype": "Link",
+      "options": "Project Budget",
+      "read_only": 1,
+      "no_copy": 1,
+      "hidden": 1
     }
   ],
   "permissions": [

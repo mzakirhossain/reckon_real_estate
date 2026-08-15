@@ -17,7 +17,6 @@ REQUIRED_DOCTYPES = (
     "Collection Entry",
     "Payment Allocation",
     "BOQ",
-    "BOQ Revision",
     "Contractor",
     "Contractor Work Order",
     "Measurement Sheet",

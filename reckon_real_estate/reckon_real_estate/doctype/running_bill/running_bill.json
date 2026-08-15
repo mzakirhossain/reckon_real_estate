@@ -6,23 +6,30 @@
   "is_submittable": 1,
   "track_changes": 1,
   "field_order": [
-    "company",
+    "running_bill_no",
+    "details_section",
     "measurement_sheet",
-    "work_order",
-    "project",
-    "contractor",
     "bill_date",
     "contractor_invoice_no",
+    "work_order",
+    "details_column",
+    "company",
+    "project",
+    "contractor",
     "status",
+    "purchase_order",
+    "purchase_invoice",
+    "items_section",
     "items",
+    "amounts_section",
     "gross_amount",
     "retention_percent",
     "retention_amount",
+    "amounts_column",
     "other_deductions",
     "net_payable",
-    "purchase_order",
-    "purchase_invoice",
-    "remarks"
+    "remarks",
+    "amended_from"
   ],
   "fields": [
     {
@@ -75,9 +82,10 @@
     {
       "fieldname": "status",
       "fieldtype": "Select",
-      "options": "Draft\nCertified\nInvoiced\nPaid\nCancelled",
+      "options": "Draft\nSubmitted\nCancelled",
       "default": "Draft",
-      "label": "Status"
+      "label": "Status",
+      "read_only": 1
     },
     {
       "fieldname": "items",
@@ -133,6 +141,49 @@
       "fieldname": "remarks",
       "fieldtype": "Small Text",
       "label": "Remarks"
+    },
+    {
+      "fieldname": "running_bill_no",
+      "label": "Running Bill No",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 1,
+      "unique": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "amounts_column",
+      "label": "Amounts Column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "amounts_section",
+      "label": "Amounts",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "items_section",
+      "label": "Items",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_section",
+      "label": "Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_column",
+      "label": "Details Column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "amended_from",
+      "label": "Amended From",
+      "fieldtype": "Link",
+      "options": "Running Bill",
+      "read_only": 1,
+      "no_copy": 1,
+      "hidden": 1
     }
   ],
   "permissions": [

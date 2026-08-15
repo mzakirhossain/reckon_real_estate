@@ -67,7 +67,7 @@ Order → Measurement Sheet → Running Bill → Purchase Invoice → Payment En
 The first six stages add construction-domain controls; the final two remain
 native ERPNext accounting documents.
 
-- BOQ and controlled BOQ revisions
+- BOQ with standard Frappe amendment and version history
 - Contractors mapped one-to-one to ERPNext Supplier
 - Contractor Work Orders that create ERPNext Purchase Orders
 - Quantity-certified Measurement Sheets with over-measurement prevention

@@ -2,9 +2,12 @@ import frappe
 from frappe.model.document import Document
 from frappe.utils import flt
 
+from reckon_real_estate.construction_workflow import set_cancelled_status, set_draft_status, set_submitted_status
+
 
 class RunningBill(Document):
     def validate(self):
+        set_draft_status(self, "running_bill_no")
         sheet = frappe.get_doc("Measurement Sheet", self.measurement_sheet)
         if sheet.docstatus != 1:
             frappe.throw("Measurement Sheet must be submitted.")
@@ -23,9 +26,14 @@ class RunningBill(Document):
         if self.net_payable < 0:
             frappe.throw("Deductions cannot exceed the gross bill amount.")
 
+    def on_submit(self):
+        set_submitted_status(self)
+
     def on_cancel(self):
         if self.purchase_invoice:
-            frappe.throw("Cancel the linked Purchase Invoice before cancelling this Running Bill.")
+            if frappe.db.get_value("Purchase Invoice", self.purchase_invoice, "docstatus") == 1:
+                frappe.throw("Cancel the linked Purchase Invoice before cancelling this Running Bill.")
+        set_cancelled_status(self)
 
 
 @frappe.whitelist()

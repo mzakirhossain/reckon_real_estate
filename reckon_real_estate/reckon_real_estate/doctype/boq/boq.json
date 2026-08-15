@@ -6,14 +6,19 @@
   "is_submittable": 1,
   "track_changes": 1,
   "field_order": [
+    "boq_no",
+    "details_section",
     "project",
-    "company",
-    "revision_no",
     "effective_date",
+    "details_column",
+    "company",
     "status",
+    "items_section",
     "items",
+    "totals_section",
     "total_amount",
-    "notes"
+    "notes",
+    "amended_from"
   ],
   "fields": [
     {
@@ -31,13 +36,6 @@
       "label": "Company"
     },
     {
-      "fieldname": "revision_no",
-      "fieldtype": "Int",
-      "default": "0",
-      "read_only": 1,
-      "label": "Revision No"
-    },
-    {
       "fieldname": "effective_date",
       "fieldtype": "Date",
       "default": "Today",
@@ -47,9 +45,10 @@
     {
       "fieldname": "status",
       "fieldtype": "Select",
-      "options": "Draft\nApproved\nSuperseded\nCancelled",
+      "options": "Draft\nSubmitted\nCancelled",
       "default": "Draft",
-      "label": "Status"
+      "label": "Status",
+      "read_only": 1
     },
     {
       "fieldname": "items",
@@ -68,6 +67,44 @@
       "fieldname": "notes",
       "fieldtype": "Text Editor",
       "label": "Notes"
+    },
+    {
+      "fieldname": "boq_no",
+      "label": "BOQ No",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "in_list_view": 1,
+      "unique": 1,
+      "no_copy": 1
+    },
+    {
+      "fieldname": "items_section",
+      "label": "Items",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_section",
+      "label": "Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_column",
+      "label": "Details Column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "totals_section",
+      "label": "Totals",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "amended_from",
+      "label": "Amended From",
+      "fieldtype": "Link",
+      "options": "BOQ",
+      "read_only": 1,
+      "no_copy": 1,
+      "hidden": 1
     }
   ],
   "permissions": [

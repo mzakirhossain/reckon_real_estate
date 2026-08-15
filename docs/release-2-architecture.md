@@ -5,7 +5,7 @@
 | Business concept | Implementation | Accounting owner |
 |---|---|---|
 | Development | Real Estate Project linked to ERPNext Project and Cost Center | ERPNext dimensions |
-| BOQ and revisions | Custom BOQ / BOQ Revision | No ledger posting |
+| BOQ and revisions | BOQ with standard Frappe amend/version history | No ledger posting |
 | Contractor | Custom construction profile linked one-to-one to Supplier | ERPNext Supplier |
 | Work order | Custom Contractor Work Order creates Purchase Order | ERPNext Buying |
 | Measurement | Custom Measurement Sheet | No ledger posting |
@@ -19,7 +19,7 @@ project profitability and accounting reports remain authoritative.
 
 ## Controls
 
-- Submitted BOQs are immutable; changes are recorded as numbered revisions.
+- Submitted BOQs are immutable; changes use Frappe's standard Cancel and Amend flow.
 - Measurements cannot exceed the ordered quantity cumulatively.
 - Running Bill quantities cannot exceed the certified Measurement Sheet.
 - Linked native Purchase Orders and Purchase Invoices must be cancelled before
