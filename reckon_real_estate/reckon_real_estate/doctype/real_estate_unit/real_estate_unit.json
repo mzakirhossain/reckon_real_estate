@@ -2,17 +2,19 @@
   "doctype": "DocType",
   "name": "Real Estate Unit",
   "module": "Reckon Real Estate",
-  "autoname": "field:unit_code",
+  "autoname": "format:REU-{YYYY}-{#####}",
   "allow_rename": 1,
   "engine": "InnoDB",
   "field_order": [
     "unit_code",
+    "details_section",
     "unit_no",
     "project",
     "building",
     "floor",
     "unit_type",
     "unit_category",
+    "details_column",
     "area_sqft",
     "bedrooms",
     "bathrooms",
@@ -20,16 +22,22 @@
     "base_rate_per_sqft",
     "list_price",
     "status",
+    "document_status",
     "erpnext_item",
-    "description"
+    "description_section",
+    "description",
+    "amended_from"
   ],
   "fields": [
     {
       "fieldname": "unit_code",
       "fieldtype": "Data",
       "label": "Unit Code",
-      "reqd": 1,
-      "unique": 1
+      "reqd": 0,
+      "read_only": 1,
+      "unique": 1,
+      "no_copy": 1,
+      "in_list_view": 1
     },
     {
       "fieldname": "unit_no",
@@ -128,6 +136,39 @@
       "fieldtype": "Text Editor",
       "label": "Description",
       "reqd": 0
+    },
+    {
+      "fieldname": "document_status",
+      "label": "Document Status",
+      "fieldtype": "Select",
+      "options": "Draft\nSubmitted\nCancelled",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "amended_from",
+      "label": "Amended From",
+      "fieldtype": "Link",
+      "options": "Real Estate Unit",
+      "read_only": 1,
+      "no_copy": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "details_section",
+      "label": "Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "description_section",
+      "label": "Description",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_column",
+      "label": "Details Column",
+      "fieldtype": "Column Break"
     }
   ],
   "permissions": [
@@ -141,8 +182,8 @@
       "cancel": 1
     }
   ],
-  "is_submittable": 0,
   "sort_field": "modified",
   "sort_order": "DESC",
-  "title_field": "unit_no"
+  "title_field": "unit_no",
+  "is_submittable": 1
 }

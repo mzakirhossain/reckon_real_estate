@@ -10,7 +10,7 @@
   "parent_page": "",
   "sequence_id": 1.0,
   "type": "Workspace",
-  "content": "[{\"id\":\"real-estate-header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Real Estate ERP</b></span>\",\"col\":12}},{\"id\":\"property-management-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Property Management\",\"col\":4}},{\"id\":\"sales-collections-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales and Collections\",\"col\":4}},{\"id\":\"construction-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Construction and Accounting\",\"col\":4}},{\"id\":\"management-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Management BI\",\"col\":4}},{\"id\":\"reports-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+  "content": "[{\"id\":\"real-estate-header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Real Estate ERP</b></span>\",\"col\":12}},{\"id\":\"total-booked-sales\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Booked Sales\",\"col\":4}},{\"id\":\"total-collections\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Collections\",\"col\":4}},{\"id\":\"outstanding-receivables\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Outstanding Receivables\",\"col\":4}},{\"id\":\"monthly-booked-sales\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Monthly Booked Sales\",\"col\":6}},{\"id\":\"monthly-collections\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Monthly Collections\",\"col\":6}},{\"id\":\"modules-header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Modules</b></span>\",\"col\":12}},{\"id\":\"property-management-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Property Management\",\"col\":4}},{\"id\":\"sales-collections-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales and Collections\",\"col\":4}},{\"id\":\"construction-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Construction and Accounting\",\"col\":4}},{\"id\":\"management-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Management BI\",\"col\":4}},{\"id\":\"reports-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
   "links": [
     {
       "type": "Card Break",
@@ -158,6 +158,22 @@
     {"type":"Link","label":"Sales Commission","link_to":"Sales Commission","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
     {"type":"Link","label":"Budget vs Actual","link_to":"Budget vs Actual","link_type":"Report","hidden":0,"link_count":0,"onboard":0,"is_query_report":1},
     {"type":"Link","label":"Construction Dashboard","link_to":"Construction Dashboard","link_type":"Report","hidden":0,"link_count":0,"onboard":0,"is_query_report":1},
-    {"type":"Link","label":"Executive Dashboard","link_to":"Executive Dashboard","link_type":"Report","hidden":0,"link_count":0,"onboard":0,"is_query_report":1}
+    {"type":"Link","label":"Executive Dashboard","link_to":"Executive Dashboard","link_type":"Report","hidden":0,"link_count":0,"onboard":0,"is_query_report":1},
+    {"type":"Link","label":"Sales Agreement","link_to":"Sales Agreement","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Accounting Reconciliation","link_to":"Accounting Reconciliation","link_type":"Report","hidden":0,"link_count":0,"onboard":0,"is_query_report":1},
+    {"type":"Link","label":"Real Estate Project Profitability","link_to":"Real Estate Project Profitability","link_type":"Report","hidden":0,"link_count":0,"onboard":0,"is_query_report":1},
+    {"type":"Card Break","label":"ERPNext Accounting and Inventory","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Sales Invoice","link_to":"Sales Invoice","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Payment Entry","link_to":"Payment Entry","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Journal Entry","link_to":"Journal Entry","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Purchase Order","link_to":"Purchase Order","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Purchase Receipt","link_to":"Purchase Receipt","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Purchase Invoice","link_to":"Purchase Invoice","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Material Request","link_to":"Material Request","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Stock Entry","link_to":"Stock Entry","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},
+    {"type":"Link","label":"Accounts Receivable","link_to":"Accounts Receivable","link_type":"Report","hidden":0,"link_count":0,"onboard":0,"is_query_report":1},
+    {"type":"Link","label":"General Ledger","link_to":"General Ledger","link_type":"Report","hidden":0,"link_count":0,"onboard":0,"is_query_report":1},
+    {"type":"Link","label":"Stock Ledger","link_to":"Stock Ledger","link_type":"Report","hidden":0,"link_count":0,"onboard":0,"is_query_report":1},
+    {"type":"Link","label":"Payment Reconciliation","link_to":"Payment Reconciliation","link_type":"DocType","hidden":0,"link_count":0,"onboard":0,"is_query_report":0}
   ]
 }

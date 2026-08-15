@@ -8,6 +8,7 @@
   "field_order": [
     "installment_plan",
     "installment_no",
+    "sales_invoice",
     "allocated_amount"
   ],
   "fields": [
@@ -16,19 +17,34 @@
       "fieldtype": "Link",
       "label": "Installment Plan",
       "reqd": 1,
-      "options": "Installment Plan"
+      "options": "Installment Plan",
+      "in_list_view": 1,
+      "columns": 3
     },
     {
       "fieldname": "installment_no",
       "fieldtype": "Int",
       "label": "Installment No",
-      "reqd": 1
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
     },
     {
       "fieldname": "allocated_amount",
       "fieldtype": "Currency",
       "label": "Allocated Amount",
-      "reqd": 1
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "sales_invoice",
+      "label": "Sales Invoice",
+      "fieldtype": "Link",
+      "options": "Sales Invoice",
+      "read_only": 1,
+      "in_list_view": 1,
+      "columns": 3
     }
   ],
   "permissions": [
@@ -44,5 +60,7 @@
   ],
   "is_submittable": 0,
   "sort_field": "modified",
-  "sort_order": "DESC"
+  "sort_order": "DESC",
+  "istable": 1,
+  "editable_grid": 1
 }

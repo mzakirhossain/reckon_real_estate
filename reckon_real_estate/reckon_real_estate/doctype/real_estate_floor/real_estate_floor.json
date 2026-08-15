@@ -2,24 +2,31 @@
   "doctype": "DocType",
   "name": "Real Estate Floor",
   "module": "Reckon Real Estate",
-  "autoname": "field:floor_code",
+  "autoname": "format:REF-{YYYY}-{#####}",
   "allow_rename": 1,
   "engine": "InnoDB",
   "field_order": [
     "floor_code",
+    "details_section",
     "floor_name",
     "project",
     "building",
+    "details_column",
     "floor_number",
-    "status"
+    "status",
+    "document_status",
+    "amended_from"
   ],
   "fields": [
     {
       "fieldname": "floor_code",
       "fieldtype": "Data",
       "label": "Floor Code",
-      "reqd": 1,
-      "unique": 1
+      "reqd": 0,
+      "read_only": 1,
+      "unique": 1,
+      "no_copy": 1,
+      "in_list_view": 1
     },
     {
       "fieldname": "floor_name",
@@ -54,6 +61,34 @@
       "reqd": 0,
       "options": "Active\nInactive",
       "default": "Active"
+    },
+    {
+      "fieldname": "document_status",
+      "label": "Document Status",
+      "fieldtype": "Select",
+      "options": "Draft\nSubmitted\nCancelled",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "amended_from",
+      "label": "Amended From",
+      "fieldtype": "Link",
+      "options": "Real Estate Floor",
+      "read_only": 1,
+      "no_copy": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "details_section",
+      "label": "Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_column",
+      "label": "Details Column",
+      "fieldtype": "Column Break"
     }
   ],
   "permissions": [
@@ -67,8 +102,8 @@
       "cancel": 1
     }
   ],
-  "is_submittable": 0,
   "sort_field": "modified",
   "sort_order": "DESC",
-  "title_field": "floor_name"
+  "title_field": "floor_name",
+  "is_submittable": 1
 }

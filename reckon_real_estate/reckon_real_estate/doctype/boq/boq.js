@@ -9,6 +9,11 @@ frappe.ui.form.on("BOQ", {
                     frappe.set_route("Form", docs[0].doctype, docs[0].name);
                 },
             }), __("Create"));
+            frm.add_custom_button(__("Material Request"), () => frappe.call({
+                method: "reckon_real_estate.reckon_real_estate.doctype.boq.boq.make_material_request",
+                args: {source_name: frm.doc.name},
+                callback: (r) => frappe.model.sync(r.message) && frappe.set_route("Form", "Material Request", r.message.name),
+            }), __("Create"));
         }
     },
 });

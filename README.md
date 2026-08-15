@@ -79,6 +79,22 @@ native ERPNext accounting documents.
 See [Release 2 architecture](docs/release-2-architecture.md) for the mapping and
 accounting ownership decisions.
 
+## Release 3 — Unified ERPNext Accounting and Inventory
+
+Release 3 connects the sales and construction lifecycles to ERPNext's native
+ledgers: Sales Agreement and Installment Plan create a linked Sales Invoice;
+Collection Entry creates a linked Payment Entry; BOQ creates Material Requests;
+and Work Orders create Material Issue Stock Entries. ERPNext remains the source
+of truth for receivables, payables, stock, payments, and General Ledger entries.
+
+Native ERPNext transactions receive traceability links to the originating real
+estate project, unit, booking, collection, BOQ, work order, agreement, plan, or
+running bill. Property Ledger and Project Profitability read posted ERPNext
+accounting data rather than maintaining a parallel ledger.
+
+See [Release 3 accounting integration](docs/release-3-accounting-integration.md)
+for transaction ownership, refunds, reconciliation, and inventory behavior.
+
 ## Release 1 scope
 
 - Real Estate Project

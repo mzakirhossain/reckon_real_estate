@@ -2,33 +2,43 @@
   "doctype": "DocType",
   "name": "Real Estate Project",
   "module": "Reckon Real Estate",
-  "autoname": "field:project_code",
+  "autoname": "format:REP-{YYYY}-{#####}",
   "allow_rename": 1,
   "engine": "InnoDB",
   "field_order": [
     "project_code",
+    "details_section",
     "project_name",
     "company",
-    "erpnext_project",
-    "cost_center",
     "project_type",
-    "status",
     "start_date",
     "expected_completion_date",
+    "details_column",
+    "erpnext_project",
+    "cost_center",
+    "project_warehouse",
+    "default_income_account",
+    "status",
+    "document_status",
     "location",
+    "property_section",
     "address",
     "land_area",
     "total_floors",
     "total_units",
-    "notes"
+    "notes",
+    "amended_from"
   ],
   "fields": [
     {
       "fieldname": "project_code",
       "fieldtype": "Data",
       "label": "Project Code",
-      "reqd": 1,
-      "unique": 1
+      "reqd": 0,
+      "read_only": 1,
+      "unique": 1,
+      "no_copy": 1,
+      "in_list_view": 1
     },
     {
       "fieldname": "project_name",
@@ -120,6 +130,51 @@
       "fieldtype": "Text Editor",
       "label": "Notes",
       "reqd": 0
+    },
+    {
+      "fieldname": "document_status",
+      "label": "Document Status",
+      "fieldtype": "Select",
+      "options": "Draft\nSubmitted\nCancelled",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "amended_from",
+      "label": "Amended From",
+      "fieldtype": "Link",
+      "options": "Real Estate Project",
+      "read_only": 1,
+      "no_copy": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "details_section",
+      "label": "Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_column",
+      "label": "Details Column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "property_section",
+      "label": "Property Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "project_warehouse",
+      "label": "Project Warehouse",
+      "fieldtype": "Link",
+      "options": "Warehouse"
+    },
+    {
+      "fieldname": "default_income_account",
+      "label": "Default Sales Income Account",
+      "fieldtype": "Link",
+      "options": "Account"
     }
   ],
   "permissions": [
@@ -133,8 +188,8 @@
       "cancel": 1
     }
   ],
-  "is_submittable": 0,
   "sort_field": "modified",
   "sort_order": "DESC",
-  "title_field": "project_name"
+  "title_field": "project_name",
+  "is_submittable": 1
 }

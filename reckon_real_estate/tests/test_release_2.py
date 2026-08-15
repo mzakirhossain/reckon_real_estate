@@ -16,6 +16,7 @@ def test_release_2_doctypes_are_present():
         "boq", "contractor", "contractor_work_order",
         "measurement_sheet", "running_bill", "project_budget", "sales_target",
         "sales_commission",
+        "sales_agreement",
     }
     assert expected <= {path.name for path in base.iterdir() if path.is_dir()}
 
@@ -89,6 +90,7 @@ def test_construction_parents_use_submission_flow_and_two_column_layout():
         fields = {field["fieldname"]: field for field in meta["fields"]}
         assert meta["is_submittable"] == 1, meta["name"]
         assert fields[number_field]["read_only"] == 1, meta["name"]
+        assert not fields[number_field].get("reqd"), meta["name"]
         assert fields[number_field]["unique"] == 1, meta["name"]
         assert fields[number_field]["no_copy"] == 1, meta["name"]
         assert fields["status"]["read_only"] == 1, meta["name"]
@@ -101,3 +103,84 @@ def test_construction_parents_use_submission_flow_and_two_column_layout():
 def test_boq_revision_doctype_is_removed():
     base = ROOT / "reckon_real_estate" / "doctype"
     assert not (base / "boq_revision" / "boq_revision.json").exists()
+
+
+def test_release_1_parents_use_numbering_submission_and_two_columns():
+    base = ROOT / "reckon_real_estate" / "doctype"
+    parents = {
+        "real_estate_project": "project_code",
+        "real_estate_building": "building_code",
+        "real_estate_floor": "floor_code",
+        "real_estate_unit": "unit_code",
+        "property_booking": "booking_no",
+        "installment_plan": "plan_no",
+        "collection_entry": "collection_no",
+    }
+
+    for folder, number_field in parents.items():
+        meta = json.loads((base / folder / f"{folder}.json").read_text(encoding="utf-8"))
+        fields = {field["fieldname"]: field for field in meta["fields"]}
+        assert meta["is_submittable"] == 1, meta["name"]
+        assert meta["autoname"].startswith("format:"), meta["name"]
+        assert fields[number_field]["read_only"] == 1, meta["name"]
+        assert not fields[number_field].get("reqd"), meta["name"]
+        assert fields[number_field]["unique"] == 1, meta["name"]
+        assert fields[number_field]["no_copy"] == 1, meta["name"]
+        assert fields["document_status"]["read_only"] == 1, meta["name"]
+        assert fields["document_status"]["options"] == "Draft\nSubmitted\nCancelled", meta["name"]
+        assert fields["amended_from"]["options"] == meta["name"], meta["name"]
+        assert fields["amended_from"]["no_copy"] == 1, meta["name"]
+        assert any(field["fieldtype"] == "Column Break" for field in meta["fields"]), meta["name"]
+
+
+def test_release_3_uses_native_erpnext_accounting_links():
+    base = ROOT / "reckon_real_estate" / "doctype"
+    plan = json.loads((base / "installment_plan" / "installment_plan.json").read_text(encoding="utf-8"))
+    plan_fields = {field["fieldname"]: field for field in plan["fields"]}
+    assert plan_fields["sales_agreement"]["options"] == "Sales Agreement"
+    assert plan_fields["sales_invoice"]["options"] == "Sales Invoice"
+
+    collection = json.loads((base / "collection_entry" / "collection_entry.json").read_text(encoding="utf-8"))
+    collection_fields = {field["fieldname"]: field for field in collection["fields"]}
+    assert collection_fields["payment_entry"]["options"] == "Payment Entry"
+    assert collection_fields["accounting_status"]["read_only"] == 1
+
+    for child in ("installment_schedule", "payment_allocation"):
+        meta = json.loads((base / child / f"{child}.json").read_text(encoding="utf-8"))
+        assert meta["istable"] == 1, meta["name"]
+        assert meta["editable_grid"] == 1, meta["name"]
+
+    reports = ROOT / "reckon_real_estate" / "report"
+    assert (reports / "accounting_reconciliation" / "accounting_reconciliation.py").exists()
+    assert (reports / "project_profitability" / "project_profitability.py").exists()
+
+
+def test_home_workspace_has_three_cards_and_two_charts_at_the_top():
+    workspace_path = (
+        ROOT / "reckon_real_estate" / "workspace" / "real_estate" / "real_estate.json"
+    )
+    workspace = json.loads(workspace_path.read_text(encoding="utf-8"))
+    content = json.loads(workspace["content"])
+
+    assert [item["type"] for item in content[1:6]] == [
+        "number_card", "number_card", "number_card", "chart", "chart"
+    ]
+    assert [item["data"]["number_card_name"] for item in content[1:4]] == [
+        "Total Booked Sales", "Total Collections", "Outstanding Receivables"
+    ]
+    assert [item["data"]["chart_name"] for item in content[4:6]] == [
+        "Monthly Booked Sales", "Monthly Collections"
+    ]
+
+
+def test_home_analytics_are_installed_during_setup_and_migration():
+    install = (ROOT / "setup" / "install.py").read_text(encoding="utf-8")
+    assert install.count("ensure_home_analytics()") == 3
+    for label in (
+        "Total Booked Sales",
+        "Total Collections",
+        "Outstanding Receivables",
+        "Monthly Booked Sales",
+        "Monthly Collections",
+    ):
+        assert label in install

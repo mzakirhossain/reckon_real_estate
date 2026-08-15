@@ -24,7 +24,15 @@ after_migrate = "reckon_real_estate.setup.install.after_migrate"
 doc_events = {
     "Customer": {
         "on_update": "reckon_real_estate.events.customer.sync_customer"
-    }
+    },
+    "Payment Entry": {
+        "on_submit": "reckon_real_estate.events.accounting.sync_payment_entry",
+        "on_cancel": "reckon_real_estate.events.accounting.sync_payment_entry",
+    },
+    "Purchase Invoice": {
+        "on_submit": "reckon_real_estate.events.accounting.sync_purchase_invoice",
+        "on_cancel": "reckon_real_estate.events.accounting.sync_purchase_invoice",
+    },
 }
 
 scheduler_events = {

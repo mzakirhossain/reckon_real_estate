@@ -2,32 +2,43 @@
   "doctype": "DocType",
   "name": "Collection Entry",
   "module": "Reckon Real Estate",
-  "autoname": "field:collection_no",
+  "autoname": "format:CE-{YYYY}-{#####}",
   "allow_rename": 1,
   "engine": "InnoDB",
   "field_order": [
     "collection_no",
+    "details_section",
     "collection_date",
     "customer",
     "project",
     "unit",
     "booking",
+    "details_column",
     "payment_mode",
     "reference_no",
     "amount",
+    "status",
+    "document_status",
+    "payment_entry",
+    "accounting_status",
+    "allocations_section",
     "allocations",
+    "totals_section",
     "allocated_amount",
     "unallocated_amount",
-    "status",
-    "remarks"
+    "remarks",
+    "amended_from"
   ],
   "fields": [
     {
       "fieldname": "collection_no",
       "fieldtype": "Data",
       "label": "Collection No",
-      "reqd": 1,
-      "unique": 1
+      "reqd": 0,
+      "read_only": 1,
+      "unique": 1,
+      "no_copy": 1,
+      "in_list_view": 1
     },
     {
       "fieldname": "collection_date",
@@ -66,10 +77,10 @@
     },
     {
       "fieldname": "payment_mode",
-      "fieldtype": "Select",
+      "fieldtype": "Link",
       "label": "Payment Mode",
       "reqd": 1,
-      "options": "Cash\nBank Transfer\nCheque\nCard\nMobile Banking\nOther"
+      "options": "Mode of Payment"
     },
     {
       "fieldname": "reference_no",
@@ -116,6 +127,59 @@
       "fieldtype": "Small Text",
       "label": "Remarks",
       "reqd": 0
+    },
+    {
+      "fieldname": "document_status",
+      "label": "Document Status",
+      "fieldtype": "Select",
+      "options": "Draft\nSubmitted\nCancelled",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "amended_from",
+      "label": "Amended From",
+      "fieldtype": "Link",
+      "options": "Collection Entry",
+      "read_only": 1,
+      "no_copy": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "details_section",
+      "label": "Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "totals_section",
+      "label": "Totals",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "allocations_section",
+      "label": "Allocations",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_column",
+      "label": "Details Column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "payment_entry",
+      "label": "ERPNext Payment Entry",
+      "fieldtype": "Link",
+      "options": "Payment Entry",
+      "read_only": 1
+    },
+    {
+      "fieldname": "accounting_status",
+      "label": "Accounting Status",
+      "fieldtype": "Select",
+      "options": "Not Created\nDraft Payment\nPosted\nCancelled",
+      "default": "Not Created",
+      "read_only": 1
     }
   ],
   "permissions": [
@@ -129,8 +193,8 @@
       "cancel": 1
     }
   ],
-  "is_submittable": 1,
   "sort_field": "modified",
   "sort_order": "DESC",
-  "title_field": "collection_no"
+  "title_field": "collection_no",
+  "is_submittable": 1
 }

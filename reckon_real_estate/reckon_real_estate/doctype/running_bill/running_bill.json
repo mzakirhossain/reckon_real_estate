@@ -19,6 +19,7 @@
     "status",
     "purchase_order",
     "purchase_invoice",
+    "accounting_status",
     "items_section",
     "items",
     "amounts_section",
@@ -184,6 +185,14 @@
       "read_only": 1,
       "no_copy": 1,
       "hidden": 1
+    },
+    {
+      "fieldname": "accounting_status",
+      "label": "Accounting Status",
+      "fieldtype": "Select",
+      "options": "Not Invoiced\nDraft Invoice\nInvoiced\nPartly Paid\nPaid\nCancelled",
+      "default": "Not Invoiced",
+      "read_only": 1
     }
   ],
   "permissions": [

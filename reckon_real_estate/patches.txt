@@ -1,3 +1,5 @@
 # Database patches are added here when a released schema requires migration.
 
 reckon_real_estate.patches.v0_2.construction_submission_flow
+reckon_real_estate.patches.v0_2.release_1_submission_flow
+reckon_real_estate.patches.v0_2.release_3_accounting_integration

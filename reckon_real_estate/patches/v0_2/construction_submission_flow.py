@@ -10,7 +10,6 @@ NUMBER_FIELDS = {
     "Running Bill": "running_bill_no",
 }
 
-
 def execute():
     # BOQ revisions now use Frappe's standard Cancel and Amend workflow.
     if frappe.db.exists("DocType", "BOQ Revision"):
@@ -27,4 +26,3 @@ def execute():
                 {number_field: row.name, "status": statuses[row.docstatus]},
                 update_modified=False,
             )
-

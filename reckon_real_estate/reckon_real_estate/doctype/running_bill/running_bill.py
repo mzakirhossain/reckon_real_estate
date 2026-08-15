@@ -50,6 +50,14 @@ def make_purchase_invoice(source_name):
     invoice.supplier, invoice.company = supplier, source.company
     invoice.bill_no, invoice.bill_date = source.contractor_invoice_no, source.bill_date
     invoice.remarks = f"Running Bill {source.name}; retention {source.retention_amount}"
+    for fieldname, value in {
+        "running_bill": source.name,
+        "contractor_work_order": source.work_order,
+        "real_estate_project": source.project,
+        "boq": frappe.db.get_value("Contractor Work Order", source.work_order, "boq"),
+    }.items():
+        if invoice.meta.has_field(fieldname):
+            invoice.set(fieldname, value)
     po_items = {}
     if source.purchase_order:
         for po_row in frappe.get_all("Purchase Order Item", filters={"parent": source.purchase_order}, fields=["name", "item_code"]):
@@ -62,4 +70,5 @@ def make_purchase_invoice(source_name):
         invoice.append("items", values)
     invoice.insert()
     source.db_set("purchase_invoice", invoice.name)
+    source.db_set("accounting_status", "Draft Invoice")
     return invoice

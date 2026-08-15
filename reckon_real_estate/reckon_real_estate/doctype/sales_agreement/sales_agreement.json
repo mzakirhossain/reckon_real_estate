@@ -1,0 +1,31 @@
+{
+  "doctype": "DocType",
+  "name": "Sales Agreement",
+  "module": "Reckon Real Estate",
+  "autoname": "format:SA-{YYYY}-{#####}",
+  "is_submittable": 1,
+  "track_changes": 1,
+  "field_order": ["agreement_no", "details_section", "booking", "customer", "project", "unit", "agreement_date", "details_column", "company", "contract_value", "discount", "net_contract_value", "booking_money", "status", "document_status", "terms_section", "terms", "amended_from"],
+  "fields": [
+    {"fieldname":"agreement_no","label":"Agreement No","fieldtype":"Data","read_only":1,"unique":1,"no_copy":1,"in_list_view":1},
+    {"fieldname":"details_section","label":"Details","fieldtype":"Section Break"},
+    {"fieldname":"booking","label":"Property Booking","fieldtype":"Link","options":"Property Booking","reqd":1},
+    {"fieldname":"customer","label":"Customer","fieldtype":"Link","options":"Customer","read_only":1},
+    {"fieldname":"project","label":"Real Estate Project","fieldtype":"Link","options":"Real Estate Project","read_only":1},
+    {"fieldname":"unit","label":"Real Estate Unit","fieldtype":"Link","options":"Real Estate Unit","read_only":1},
+    {"fieldname":"agreement_date","label":"Agreement Date","fieldtype":"Date","default":"Today","reqd":1},
+    {"fieldname":"details_column","label":"Details Column","fieldtype":"Column Break"},
+    {"fieldname":"company","label":"Company","fieldtype":"Link","options":"Company","read_only":1},
+    {"fieldname":"contract_value","label":"Contract Value","fieldtype":"Currency","read_only":1},
+    {"fieldname":"discount","label":"Discount","fieldtype":"Currency","read_only":1},
+    {"fieldname":"net_contract_value","label":"Net Contract Value","fieldtype":"Currency","read_only":1},
+    {"fieldname":"booking_money","label":"Booking Money","fieldtype":"Currency","read_only":1},
+    {"fieldname":"status","label":"Agreement Status","fieldtype":"Select","options":"Draft\nActive\nCompleted\nCancelled","default":"Draft","read_only":1},
+    {"fieldname":"document_status","label":"Document Status","fieldtype":"Select","options":"Draft\nSubmitted\nCancelled","default":"Draft","read_only":1,"in_list_view":1},
+    {"fieldname":"terms_section","label":"Terms and Conditions","fieldtype":"Section Break"},
+    {"fieldname":"terms","label":"Terms and Conditions","fieldtype":"Text Editor"},
+    {"fieldname":"amended_from","label":"Amended From","fieldtype":"Link","options":"Sales Agreement","read_only":1,"no_copy":1,"hidden":1}
+  ],
+  "permissions": [{"role":"System Manager","read":1,"write":1,"create":1,"delete":1,"submit":1,"cancel":1}],
+  "sort_field":"modified","sort_order":"DESC","title_field":"agreement_no"
+}

@@ -1,6 +1,7 @@
 """Frappe/ERPNext installation checks for supported platform versions."""
 
 from importlib import import_module
+import json
 
 import frappe
 
@@ -24,6 +25,7 @@ REQUIRED_DOCTYPES = (
     "Project Budget",
     "Sales Target",
     "Sales Commission",
+    "Sales Agreement",
 )
 ERPNext_MASTER_DOCTYPES = (
     "Customer",
@@ -35,6 +37,11 @@ ERPNext_MASTER_DOCTYPES = (
     "Purchase Order",
     "Purchase Invoice",
     "Payment Entry",
+    "Sales Invoice",
+    "Material Request",
+    "Purchase Receipt",
+    "Stock Entry",
+    "Journal Entry",
     "Budget",
 )
 LEGACY_MODULES = (
@@ -80,13 +87,169 @@ def before_install():
 def after_install():
     """Confirm that app schema sync created every Release 1 DocType."""
     cleanup_legacy_modules()
+    ensure_erpnext_custom_fields()
+    ensure_home_analytics()
     validate_installation()
 
 
 def after_migrate():
     """Recheck the schema after an app update or framework migration."""
     cleanup_legacy_modules()
+    ensure_erpnext_custom_fields()
+    ensure_home_analytics()
     validate_installation()
+
+
+def ensure_home_analytics():
+    """Create the native, permission-aware cards and charts used by the workspace."""
+    def submitted(doctype):
+        return json.dumps([[doctype, "docstatus", "=", 1, False]])
+    real_estate_invoices = json.dumps(
+        [
+            ["Sales Invoice", "docstatus", "=", 1, False],
+            ["Sales Invoice", "real_estate_booking", "is", "set", False],
+        ]
+    )
+
+    number_cards = (
+        {
+            "label": "Total Booked Sales",
+            "document_type": "Property Booking",
+            "aggregate_function_based_on": "net_contract_value",
+            "filters_json": submitted("Property Booking"),
+            "color": "#2490EF",
+        },
+        {
+            "label": "Total Collections",
+            "document_type": "Collection Entry",
+            "aggregate_function_based_on": "amount",
+            "filters_json": submitted("Collection Entry"),
+            "color": "#29CD42",
+        },
+        {
+            "label": "Outstanding Receivables",
+            "document_type": "Sales Invoice",
+            "aggregate_function_based_on": "outstanding_amount",
+            "filters_json": real_estate_invoices,
+            "color": "#EC864B",
+        },
+    )
+    for values in number_cards:
+        _upsert_analytics_doc(
+            "Number Card",
+            values["label"],
+            {
+                **values,
+                "type": "Document Type",
+                "function": "Sum",
+                "is_public": 1,
+                "is_standard": 0,
+                "show_percentage_stats": 1,
+                "stats_time_interval": "Monthly",
+                "dynamic_filters_json": "[]",
+            },
+        )
+
+    charts = (
+        {
+            "chart_name": "Monthly Booked Sales",
+            "document_type": "Property Booking",
+            "based_on": "booking_date",
+            "value_based_on": "net_contract_value",
+            "filters_json": submitted("Property Booking"),
+            "color": "#2490EF",
+        },
+        {
+            "chart_name": "Monthly Collections",
+            "document_type": "Collection Entry",
+            "based_on": "collection_date",
+            "value_based_on": "amount",
+            "filters_json": submitted("Collection Entry"),
+            "color": "#29CD42",
+        },
+    )
+    for values in charts:
+        _upsert_analytics_doc(
+            "Dashboard Chart",
+            values["chart_name"],
+            {
+                **values,
+                "chart_type": "Sum",
+                "timeseries": 1,
+                "timespan": "Last Year",
+                "time_interval": "Monthly",
+                "type": "Line",
+                "is_public": 1,
+                "is_standard": 0,
+                "show_values_over_chart": 1,
+                "dynamic_filters_json": "[]",
+            },
+        )
+
+
+def _upsert_analytics_doc(doctype, name, values):
+    """Keep an app-owned analytics definition current across migrations."""
+    if frappe.db.exists(doctype, name):
+        doc = frappe.get_doc(doctype, name)
+        doc.update(values)
+        doc.flags.ignore_permissions = True
+        doc.save()
+        return
+
+    frappe.get_doc({"doctype": doctype, **values}).insert(ignore_permissions=True)
+
+
+def ensure_erpnext_custom_fields():
+    """Add traceability links without replacing ERPNext accounting/stock DocTypes."""
+    from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+
+    common = {"read_only": 1, "no_copy": 0}
+    custom_fields = {
+        "Sales Invoice": [
+            {**common, "fieldname": "sales_agreement", "label": "Sales Agreement", "fieldtype": "Link", "options": "Sales Agreement"},
+            {**common, "fieldname": "installment_plan", "label": "Installment Plan", "fieldtype": "Link", "options": "Installment Plan"},
+            {**common, "fieldname": "real_estate_booking", "label": "Property Booking", "fieldtype": "Link", "options": "Property Booking"},
+            {**common, "fieldname": "real_estate_unit", "label": "Real Estate Unit", "fieldtype": "Link", "options": "Real Estate Unit"},
+            {**common, "fieldname": "real_estate_project", "label": "Real Estate Project", "fieldtype": "Link", "options": "Real Estate Project"},
+        ],
+        "Payment Entry": [
+            {**common, "fieldname": "collection_entry", "label": "Collection Entry", "fieldtype": "Link", "options": "Collection Entry"},
+            {**common, "fieldname": "real_estate_booking", "label": "Property Booking", "fieldtype": "Link", "options": "Property Booking"},
+            {**common, "fieldname": "real_estate_unit", "label": "Real Estate Unit", "fieldtype": "Link", "options": "Real Estate Unit"},
+            {**common, "fieldname": "real_estate_project", "label": "Real Estate Project", "fieldtype": "Link", "options": "Real Estate Project"},
+        ],
+        "Purchase Order": [
+            {**common, "fieldname": "contractor_work_order", "label": "Contractor Work Order", "fieldtype": "Link", "options": "Contractor Work Order"},
+            {**common, "fieldname": "real_estate_project", "label": "Real Estate Project", "fieldtype": "Link", "options": "Real Estate Project"},
+            {**common, "fieldname": "boq", "label": "BOQ", "fieldtype": "Link", "options": "BOQ"},
+        ],
+        "Purchase Invoice": [
+            {**common, "fieldname": "running_bill", "label": "Running Bill", "fieldtype": "Link", "options": "Running Bill"},
+            {**common, "fieldname": "contractor_work_order", "label": "Contractor Work Order", "fieldtype": "Link", "options": "Contractor Work Order"},
+            {**common, "fieldname": "real_estate_project", "label": "Real Estate Project", "fieldtype": "Link", "options": "Real Estate Project"},
+            {**common, "fieldname": "boq", "label": "BOQ", "fieldtype": "Link", "options": "BOQ"},
+        ],
+        "Stock Entry": [
+            {**common, "fieldname": "real_estate_project", "label": "Real Estate Project", "fieldtype": "Link", "options": "Real Estate Project"},
+            {**common, "fieldname": "contractor_work_order", "label": "Contractor Work Order", "fieldtype": "Link", "options": "Contractor Work Order"},
+            {**common, "fieldname": "boq", "label": "BOQ", "fieldtype": "Link", "options": "BOQ"},
+        ],
+        "Material Request": [
+            {**common, "fieldname": "real_estate_project", "label": "Real Estate Project", "fieldtype": "Link", "options": "Real Estate Project"},
+            {**common, "fieldname": "boq", "label": "BOQ", "fieldtype": "Link", "options": "BOQ"},
+        ],
+        "Purchase Receipt": [
+            {**common, "fieldname": "real_estate_project", "label": "Real Estate Project", "fieldtype": "Link", "options": "Real Estate Project"},
+            {**common, "fieldname": "contractor_work_order", "label": "Contractor Work Order", "fieldtype": "Link", "options": "Contractor Work Order"},
+            {**common, "fieldname": "boq", "label": "BOQ", "fieldtype": "Link", "options": "BOQ"},
+        ],
+        "Journal Entry": [
+            {**common, "fieldname": "real_estate_project", "label": "Real Estate Project", "fieldtype": "Link", "options": "Real Estate Project"},
+            {**common, "fieldname": "real_estate_booking", "label": "Property Booking", "fieldtype": "Link", "options": "Property Booking"},
+            {**common, "fieldname": "real_estate_unit", "label": "Real Estate Unit", "fieldtype": "Link", "options": "Real Estate Unit"},
+        ],
+    }
+    create_custom_fields(custom_fields, update=True)
 
 
 def cleanup_legacy_modules():

@@ -2,30 +2,40 @@
   "doctype": "DocType",
   "name": "Installment Plan",
   "module": "Reckon Real Estate",
-  "autoname": "field:plan_no",
+  "autoname": "format:IP-{YYYY}-{#####}",
   "allow_rename": 1,
   "engine": "InnoDB",
   "field_order": [
     "plan_no",
+    "details_section",
+    "sales_agreement",
     "booking",
     "customer",
     "project",
     "unit",
     "plan_start_date",
     "frequency",
+    "details_column",
     "number_of_installments",
     "down_payment",
     "total_scheduled",
+    "status",
+    "document_status",
+    "sales_invoice",
+    "schedule_section",
     "installments",
-    "status"
+    "amended_from"
   ],
   "fields": [
     {
       "fieldname": "plan_no",
       "fieldtype": "Data",
       "label": "Plan No",
-      "reqd": 1,
-      "unique": 1
+      "reqd": 0,
+      "read_only": 1,
+      "unique": 1,
+      "no_copy": 1,
+      "in_list_view": 1
     },
     {
       "fieldname": "booking",
@@ -101,6 +111,53 @@
       "reqd": 0,
       "options": "Draft\nActive\nCompleted\nCancelled",
       "default": "Draft"
+    },
+    {
+      "fieldname": "document_status",
+      "label": "Document Status",
+      "fieldtype": "Select",
+      "options": "Draft\nSubmitted\nCancelled",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "amended_from",
+      "label": "Amended From",
+      "fieldtype": "Link",
+      "options": "Installment Plan",
+      "read_only": 1,
+      "no_copy": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "schedule_section",
+      "label": "Installment Schedule",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_section",
+      "label": "Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_column",
+      "label": "Details Column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "sales_agreement",
+      "label": "Sales Agreement",
+      "fieldtype": "Link",
+      "options": "Sales Agreement",
+      "reqd": 1
+    },
+    {
+      "fieldname": "sales_invoice",
+      "label": "Sales Invoice",
+      "fieldtype": "Link",
+      "options": "Sales Invoice",
+      "read_only": 1
     }
   ],
   "permissions": [
@@ -114,8 +171,8 @@
       "cancel": 1
     }
   ],
-  "is_submittable": 0,
   "sort_field": "modified",
   "sort_order": "DESC",
-  "title_field": "plan_no"
+  "title_field": "plan_no",
+  "is_submittable": 1
 }

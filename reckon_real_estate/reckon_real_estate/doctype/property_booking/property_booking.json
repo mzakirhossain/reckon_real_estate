@@ -2,31 +2,39 @@
   "doctype": "DocType",
   "name": "Property Booking",
   "module": "Reckon Real Estate",
-  "autoname": "field:booking_no",
+  "autoname": "format:PB-{YYYY}-{#####}",
   "allow_rename": 1,
   "engine": "InnoDB",
   "field_order": [
     "booking_no",
+    "details_section",
     "customer",
     "project",
     "unit",
     "booking_date",
     "agreement_date",
+    "details_column",
     "contract_value",
     "discount",
     "net_contract_value",
     "booking_money",
-    "payment_terms",
     "status",
-    "notes"
+    "document_status",
+    "terms_section",
+    "payment_terms",
+    "notes",
+    "amended_from"
   ],
   "fields": [
     {
       "fieldname": "booking_no",
       "fieldtype": "Data",
       "label": "Booking No",
-      "reqd": 1,
-      "unique": 1
+      "reqd": 0,
+      "read_only": 1,
+      "unique": 1,
+      "no_copy": 1,
+      "in_list_view": 1
     },
     {
       "fieldname": "customer",
@@ -106,6 +114,39 @@
       "fieldtype": "Text Editor",
       "label": "Notes",
       "reqd": 0
+    },
+    {
+      "fieldname": "document_status",
+      "label": "Document Status",
+      "fieldtype": "Select",
+      "options": "Draft\nSubmitted\nCancelled",
+      "default": "Draft",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "amended_from",
+      "label": "Amended From",
+      "fieldtype": "Link",
+      "options": "Property Booking",
+      "read_only": 1,
+      "no_copy": 1,
+      "hidden": 1
+    },
+    {
+      "fieldname": "details_section",
+      "label": "Details",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "details_column",
+      "label": "Details Column",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "terms_section",
+      "label": "Terms",
+      "fieldtype": "Section Break"
     }
   ],
   "permissions": [
@@ -119,8 +160,8 @@
       "cancel": 1
     }
   ],
-  "is_submittable": 0,
   "sort_field": "modified",
   "sort_order": "DESC",
-  "title_field": "booking_no"
+  "title_field": "booking_no",
+  "is_submittable": 1
 }
