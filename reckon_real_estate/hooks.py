@@ -9,7 +9,7 @@ add_to_apps_screen = [
     {
         "name": "reckon_real_estate",
         "title": "Real Estate",
-        "route": "/app/reckon-real-estate",
+        "route": "/app/real-estate",
     }
 ]
 

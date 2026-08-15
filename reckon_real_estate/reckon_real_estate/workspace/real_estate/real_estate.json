@@ -1,0 +1,150 @@
+{
+  "doctype": "Workspace",
+  "name": "Real Estate",
+  "label": "Real Estate",
+  "title": "Real Estate",
+  "module": "Reckon Real Estate",
+  "public": 1,
+  "is_hidden": 0,
+  "for_user": "",
+  "parent_page": "",
+  "sequence_id": 1.0,
+  "type": "Workspace",
+  "content": "[{\"id\":\"real-estate-header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Real Estate</b></span>\",\"col\":12}},{\"id\":\"property-management-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Property Management\",\"col\":4}},{\"id\":\"sales-collections-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales and Collections\",\"col\":4}},{\"id\":\"reports-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+  "links": [
+    {
+      "type": "Card Break",
+      "label": "Property Management",
+      "hidden": 0,
+      "link_count": 0,
+      "onboard": 0,
+      "is_query_report": 0
+    },
+    {
+      "type": "Link",
+      "label": "Real Estate Project",
+      "link_to": "Real Estate Project",
+      "link_type": "DocType",
+      "hidden": 0,
+      "link_count": 0,
+      "onboard": 0,
+      "is_query_report": 0,
+      "dependencies": ""
+    },
+    {
+      "type": "Link",
+      "label": "Real Estate Building",
+      "link_to": "Real Estate Building",
+      "link_type": "DocType",
+      "hidden": 0,
+      "link_count": 0,
+      "onboard": 0,
+      "is_query_report": 0,
+      "dependencies": ""
+    },
+    {
+      "type": "Link",
+      "label": "Real Estate Floor",
+      "link_to": "Real Estate Floor",
+      "link_type": "DocType",
+      "hidden": 0,
+      "link_count": 0,
+      "onboard": 0,
+      "is_query_report": 0,
+      "dependencies": ""
+    },
+    {
+      "type": "Link",
+      "label": "Real Estate Unit",
+      "link_to": "Real Estate Unit",
+      "link_type": "DocType",
+      "hidden": 0,
+      "link_count": 0,
+      "onboard": 0,
+      "is_query_report": 0,
+      "dependencies": ""
+    },
+    {
+      "type": "Card Break",
+      "label": "Sales and Collections",
+      "hidden": 0,
+      "link_count": 0,
+      "onboard": 0,
+      "is_query_report": 0
+    },
+    {
+      "type": "Link",
+      "label": "Property Booking",
+      "link_to": "Property Booking",
+      "link_type": "DocType",
+      "hidden": 0,
+      "link_count": 0,
+      "onboard": 0,
+      "is_query_report": 0,
+      "dependencies": ""
+    },
+    {
+      "type": "Link",
+      "label": "Installment Plan",
+      "link_to": "Installment Plan",
+      "link_type": "DocType",
+      "hidden": 0,
+      "link_count": 0,
+      "onboard": 0,
+      "is_query_report": 0,
+      "dependencies": ""
+    },
+    {
+      "type": "Link",
+      "label": "Collection Entry",
+      "link_to": "Collection Entry",
+      "link_type": "DocType",
+      "hidden": 0,
+      "link_count": 0,
+      "onboard": 0,
+      "is_query_report": 0,
+      "dependencies": ""
+    },
+    {
+      "type": "Card Break",
+      "label": "Reports",
+      "hidden": 0,
+      "link_count": 0,
+      "onboard": 0,
+      "is_query_report": 0
+    },
+    {
+      "type": "Link",
+      "label": "Unit Availability",
+      "link_to": "Unit Availability",
+      "link_type": "Report",
+      "hidden": 0,
+      "link_count": 0,
+      "onboard": 0,
+      "is_query_report": 0,
+      "dependencies": ""
+    },
+    {
+      "type": "Link",
+      "label": "Collection Overdue",
+      "link_to": "Collection Overdue",
+      "link_type": "Report",
+      "hidden": 0,
+      "link_count": 0,
+      "onboard": 0,
+      "is_query_report": 0,
+      "dependencies": ""
+    },
+    {
+      "type": "Link",
+      "label": "Property Ledger",
+      "link_to": "Property Ledger",
+      "link_type": "Report",
+      "hidden": 0,
+      "link_count": 0,
+      "onboard": 0,
+      "is_query_report": 0,
+      "dependencies": ""
+    }
+  ]
+}
