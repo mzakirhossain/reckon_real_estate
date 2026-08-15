@@ -82,7 +82,7 @@ Frappe / ERPNext v15.x
 
 ```bash
 cd ~/frappe-bench
-bench get-app /path/to/reckon_real_estate
+bench get-app https://github.com/mzakirhossain/reckon_real_estate
 bench --site yoursite install-app reckon_real_estate
 bench --site yoursite migrate
 bench --site yoursite clear-cache
