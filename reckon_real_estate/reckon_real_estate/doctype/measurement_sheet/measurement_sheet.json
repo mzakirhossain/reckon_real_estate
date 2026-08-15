@@ -1,1 +1,107 @@
-{"doctype":"DocType","name":"Measurement Sheet","module":"Reckon Real Estate","autoname":"format:MS-{YYYY}-{#####}","is_submittable":1,"track_changes":1,"field_order":["work_order","project","contractor","measurement_date","period_from","period_to","status","items","total_amount","certified_by","remarks"],"fields":[{"fieldname":"work_order","fieldtype":"Link","options":"Contractor Work Order","reqd":1},{"fieldname":"project","fieldtype":"Link","options":"Real Estate Project","read_only":1},{"fieldname":"contractor","fieldtype":"Link","options":"Contractor","read_only":1},{"fieldname":"measurement_date","fieldtype":"Date","default":"Today","reqd":1},{"fieldname":"period_from","fieldtype":"Date","reqd":1},{"fieldname":"period_to","fieldtype":"Date","reqd":1},{"fieldname":"status","fieldtype":"Select","options":"Draft\nMeasured\nCertified\nRejected","default":"Draft"},{"fieldname":"items","fieldtype":"Table","options":"Measurement Item","reqd":1},{"fieldname":"total_amount","fieldtype":"Currency","read_only":1},{"fieldname":"certified_by","fieldtype":"Link","options":"User"},{"fieldname":"remarks","fieldtype":"Small Text"}],"permissions":[{"role":"System Manager","read":1,"write":1,"create":1,"delete":1,"submit":1,"cancel":1}],"sort_field":"modified","sort_order":"DESC"}
+{
+  "doctype": "DocType",
+  "name": "Measurement Sheet",
+  "module": "Reckon Real Estate",
+  "autoname": "format:MS-{YYYY}-{#####}",
+  "is_submittable": 1,
+  "track_changes": 1,
+  "field_order": [
+    "work_order",
+    "project",
+    "contractor",
+    "measurement_date",
+    "period_from",
+    "period_to",
+    "status",
+    "items",
+    "total_amount",
+    "certified_by",
+    "remarks"
+  ],
+  "fields": [
+    {
+      "fieldname": "work_order",
+      "fieldtype": "Link",
+      "options": "Contractor Work Order",
+      "reqd": 1,
+      "label": "Work Order"
+    },
+    {
+      "fieldname": "project",
+      "fieldtype": "Link",
+      "options": "Real Estate Project",
+      "read_only": 1,
+      "label": "Project"
+    },
+    {
+      "fieldname": "contractor",
+      "fieldtype": "Link",
+      "options": "Contractor",
+      "read_only": 1,
+      "label": "Contractor"
+    },
+    {
+      "fieldname": "measurement_date",
+      "fieldtype": "Date",
+      "default": "Today",
+      "reqd": 1,
+      "label": "Measurement Date"
+    },
+    {
+      "fieldname": "period_from",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "label": "Period From"
+    },
+    {
+      "fieldname": "period_to",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "label": "Period To"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "options": "Draft\nMeasured\nCertified\nRejected",
+      "default": "Draft",
+      "label": "Status"
+    },
+    {
+      "fieldname": "items",
+      "fieldtype": "Table",
+      "options": "Measurement Item",
+      "reqd": 1,
+      "label": "Items"
+    },
+    {
+      "fieldname": "total_amount",
+      "fieldtype": "Currency",
+      "read_only": 1,
+      "label": "Total Amount"
+    },
+    {
+      "fieldname": "certified_by",
+      "fieldtype": "Link",
+      "options": "User",
+      "label": "Certified By"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Small Text",
+      "label": "Remarks"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

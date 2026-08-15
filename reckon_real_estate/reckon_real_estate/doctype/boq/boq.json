@@ -1,1 +1,87 @@
-{"doctype":"DocType","name":"BOQ","module":"Reckon Real Estate","autoname":"format:BOQ-{YYYY}-{#####}","is_submittable":1,"track_changes":1,"field_order":["project","company","revision_no","effective_date","status","items","total_amount","notes"],"fields":[{"fieldname":"project","label":"Real Estate Project","fieldtype":"Link","options":"Real Estate Project","reqd":1},{"fieldname":"company","fieldtype":"Link","options":"Company","reqd":1},{"fieldname":"revision_no","fieldtype":"Int","default":"0","read_only":1},{"fieldname":"effective_date","fieldtype":"Date","default":"Today","reqd":1},{"fieldname":"status","fieldtype":"Select","options":"Draft\nApproved\nSuperseded\nCancelled","default":"Draft"},{"fieldname":"items","fieldtype":"Table","options":"BOQ Item","reqd":1},{"fieldname":"total_amount","fieldtype":"Currency","read_only":1},{"fieldname":"notes","fieldtype":"Text Editor"}],"permissions":[{"role":"System Manager","read":1,"write":1,"create":1,"delete":1,"submit":1,"cancel":1}],"sort_field":"modified","sort_order":"DESC","title_field":"project"}
+{
+  "doctype": "DocType",
+  "name": "BOQ",
+  "module": "Reckon Real Estate",
+  "autoname": "format:BOQ-{YYYY}-{#####}",
+  "is_submittable": 1,
+  "track_changes": 1,
+  "field_order": [
+    "project",
+    "company",
+    "revision_no",
+    "effective_date",
+    "status",
+    "items",
+    "total_amount",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "project",
+      "label": "Real Estate Project",
+      "fieldtype": "Link",
+      "options": "Real Estate Project",
+      "reqd": 1
+    },
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "label": "Company"
+    },
+    {
+      "fieldname": "revision_no",
+      "fieldtype": "Int",
+      "default": "0",
+      "read_only": 1,
+      "label": "Revision No"
+    },
+    {
+      "fieldname": "effective_date",
+      "fieldtype": "Date",
+      "default": "Today",
+      "reqd": 1,
+      "label": "Effective Date"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "options": "Draft\nApproved\nSuperseded\nCancelled",
+      "default": "Draft",
+      "label": "Status"
+    },
+    {
+      "fieldname": "items",
+      "fieldtype": "Table",
+      "options": "BOQ Item",
+      "reqd": 1,
+      "label": "Items"
+    },
+    {
+      "fieldname": "total_amount",
+      "fieldtype": "Currency",
+      "read_only": 1,
+      "label": "Total Amount"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text Editor",
+      "label": "Notes"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "project"
+}

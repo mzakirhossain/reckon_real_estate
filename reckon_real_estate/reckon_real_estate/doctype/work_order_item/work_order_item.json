@@ -1,1 +1,79 @@
-{"doctype":"DocType","name":"Work Order Item","module":"Reckon Real Estate","istable":1,"field_order":["item_code","description","uom","quantity","rate","amount","measured_quantity","billed_quantity"],"fields":[{"fieldname":"item_code","fieldtype":"Link","options":"Item","reqd":1,"in_list_view":1},{"fieldname":"description","fieldtype":"Small Text"},{"fieldname":"uom","fieldtype":"Link","options":"UOM","reqd":1},{"fieldname":"quantity","fieldtype":"Float","reqd":1,"in_list_view":1},{"fieldname":"rate","fieldtype":"Currency","reqd":1,"in_list_view":1},{"fieldname":"amount","fieldtype":"Currency","read_only":1,"in_list_view":1},{"fieldname":"measured_quantity","fieldtype":"Float","read_only":1},{"fieldname":"billed_quantity","fieldtype":"Float","read_only":1}]}
+{
+  "doctype": "DocType",
+  "name": "Work Order Item",
+  "module": "Reckon Real Estate",
+  "istable": 1,
+  "field_order": [
+    "item_code",
+    "description",
+    "uom",
+    "quantity",
+    "rate",
+    "amount",
+    "measured_quantity",
+    "billed_quantity"
+  ],
+  "fields": [
+    {
+      "fieldname": "item_code",
+      "fieldtype": "Link",
+      "options": "Item",
+      "reqd": 1,
+      "label": "Item Code",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Small Text",
+      "label": "Description",
+      "in_list_view": 1,
+      "columns": 3
+    },
+    {
+      "fieldname": "uom",
+      "fieldtype": "Link",
+      "options": "UOM",
+      "reqd": 1,
+      "label": "UOM",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "quantity",
+      "fieldtype": "Float",
+      "reqd": 1,
+      "label": "Quantity",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "rate",
+      "fieldtype": "Currency",
+      "reqd": 1,
+      "label": "Rate",
+      "in_list_view": 1,
+      "columns": 1
+    },
+    {
+      "fieldname": "amount",
+      "fieldtype": "Currency",
+      "read_only": 1,
+      "label": "Amount",
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
+      "fieldname": "measured_quantity",
+      "fieldtype": "Float",
+      "read_only": 1,
+      "label": "Measured Quantity"
+    },
+    {
+      "fieldname": "billed_quantity",
+      "fieldtype": "Float",
+      "read_only": 1,
+      "label": "Billed Quantity"
+    }
+  ]
+}

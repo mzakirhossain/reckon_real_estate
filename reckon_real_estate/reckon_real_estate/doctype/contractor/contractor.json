@@ -1,1 +1,88 @@
-{"doctype":"DocType","name":"Contractor","module":"Reckon Real Estate","autoname":"format:CTR-{#####}","track_changes":1,"field_order":["contractor_name","supplier","contractor_type","tax_id","contact_person","phone","email","status","notes"],"fields":[{"fieldname":"contractor_name","fieldtype":"Data","reqd":1,"in_list_view":1},{"fieldname":"supplier","fieldtype":"Link","options":"Supplier","reqd":1,"unique":1,"in_list_view":1},{"fieldname":"contractor_type","fieldtype":"Select","options":"General\nCivil\nElectrical\nPlumbing\nFinishing\nSpecialist\nLabour","default":"General"},{"fieldname":"tax_id","fieldtype":"Data"},{"fieldname":"contact_person","fieldtype":"Link","options":"Contact"},{"fieldname":"phone","fieldtype":"Data"},{"fieldname":"email","fieldtype":"Data","options":"Email"},{"fieldname":"status","fieldtype":"Select","options":"Active\nSuspended\nInactive","default":"Active","in_list_view":1},{"fieldname":"notes","fieldtype":"Text Editor"}],"permissions":[{"role":"System Manager","read":1,"write":1,"create":1,"delete":1}],"title_field":"contractor_name"}
+{
+  "doctype": "DocType",
+  "name": "Contractor",
+  "module": "Reckon Real Estate",
+  "autoname": "format:CTR-{#####}",
+  "track_changes": 1,
+  "field_order": [
+    "contractor_name",
+    "supplier",
+    "contractor_type",
+    "tax_id",
+    "contact_person",
+    "phone",
+    "email",
+    "status",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "contractor_name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "label": "Contractor Name"
+    },
+    {
+      "fieldname": "supplier",
+      "fieldtype": "Link",
+      "options": "Supplier",
+      "reqd": 1,
+      "unique": 1,
+      "in_list_view": 1,
+      "label": "Supplier"
+    },
+    {
+      "fieldname": "contractor_type",
+      "fieldtype": "Select",
+      "options": "General\nCivil\nElectrical\nPlumbing\nFinishing\nSpecialist\nLabour",
+      "default": "General",
+      "label": "Contractor Type"
+    },
+    {
+      "fieldname": "tax_id",
+      "fieldtype": "Data",
+      "label": "Tax ID"
+    },
+    {
+      "fieldname": "contact_person",
+      "fieldtype": "Link",
+      "options": "Contact",
+      "label": "Contact Person"
+    },
+    {
+      "fieldname": "phone",
+      "fieldtype": "Data",
+      "label": "Phone"
+    },
+    {
+      "fieldname": "email",
+      "fieldtype": "Data",
+      "options": "Email",
+      "label": "Email"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "options": "Active\nSuspended\nInactive",
+      "default": "Active",
+      "in_list_view": 1,
+      "label": "Status"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text Editor",
+      "label": "Notes"
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    }
+  ],
+  "title_field": "contractor_name"
+}
