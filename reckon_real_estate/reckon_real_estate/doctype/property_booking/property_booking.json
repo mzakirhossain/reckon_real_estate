@@ -1,0 +1,126 @@
+{
+  "doctype": "DocType",
+  "name": "Property Booking",
+  "module": "Reckon Real Estate",
+  "autoname": "field:booking_no",
+  "allow_rename": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "booking_no",
+    "customer",
+    "project",
+    "unit",
+    "booking_date",
+    "agreement_date",
+    "contract_value",
+    "discount",
+    "net_contract_value",
+    "booking_money",
+    "payment_terms",
+    "status",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "booking_no",
+      "fieldtype": "Data",
+      "label": "Booking No",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "customer",
+      "fieldtype": "Link",
+      "label": "Customer",
+      "reqd": 1,
+      "options": "Customer"
+    },
+    {
+      "fieldname": "project",
+      "fieldtype": "Link",
+      "label": "Project",
+      "reqd": 1,
+      "options": "Real Estate Project"
+    },
+    {
+      "fieldname": "unit",
+      "fieldtype": "Link",
+      "label": "Unit",
+      "reqd": 1,
+      "options": "Real Estate Unit"
+    },
+    {
+      "fieldname": "booking_date",
+      "fieldtype": "Date",
+      "label": "Booking Date",
+      "reqd": 1,
+      "default": "Today"
+    },
+    {
+      "fieldname": "agreement_date",
+      "fieldtype": "Date",
+      "label": "Agreement Date",
+      "reqd": 0
+    },
+    {
+      "fieldname": "contract_value",
+      "fieldtype": "Currency",
+      "label": "Contract Value",
+      "reqd": 1
+    },
+    {
+      "fieldname": "discount",
+      "fieldtype": "Currency",
+      "label": "Discount",
+      "reqd": 0
+    },
+    {
+      "fieldname": "net_contract_value",
+      "fieldtype": "Currency",
+      "label": "Net Contract Value",
+      "reqd": 0,
+      "read_only": 1
+    },
+    {
+      "fieldname": "booking_money",
+      "fieldtype": "Currency",
+      "label": "Booking Money",
+      "reqd": 0
+    },
+    {
+      "fieldname": "payment_terms",
+      "fieldtype": "Small Text",
+      "label": "Payment Terms",
+      "reqd": 0
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "reqd": 0,
+      "options": "Draft\nReserved\nConfirmed\nAgreement Signed\nActive\nCompleted\nCancelled",
+      "default": "Draft"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text Editor",
+      "label": "Notes",
+      "reqd": 0
+    }
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "submit": 1,
+      "cancel": 1
+    }
+  ],
+  "is_submittable": 0,
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "booking_no"
+}

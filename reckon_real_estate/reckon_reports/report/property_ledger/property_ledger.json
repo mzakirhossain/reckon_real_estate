@@ -1,7 +1,0 @@
-{
-  "doctype": "Report",
-  "name": "Property Ledger",
-  "module": "Reckon Reports",
-  "report_type": "Script Report",
-  "is_standard": "Yes"
-}

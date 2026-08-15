@@ -88,6 +88,9 @@ Reckon Real Estate keeps its own `Reckon …` modules and custom DocTypes. It
 does not replace ERPNext masters: it links to the existing Customer, Company,
 Project, Cost Center, and Item DocTypes.
 
+All custom DocTypes and Reports are grouped in the single **Real Estate** Desk
+module, available at `/app/reckon-real-estate` after migration.
+
 ## Installation
 
 ```bash

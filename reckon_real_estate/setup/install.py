@@ -24,6 +24,12 @@ ERPNext_MASTER_DOCTYPES = (
     "Cost Center",
     "Item",
 )
+LEGACY_MODULES = (
+    "Reckon Property Management",
+    "Reckon Sales",
+    "Reckon Collection",
+    "Reckon Reports",
+)
 
 
 def _major_version(app_name):
@@ -60,12 +66,24 @@ def before_install():
 
 def after_install():
     """Confirm that app schema sync created every Release 1 DocType."""
+    cleanup_legacy_modules()
     validate_installation()
 
 
 def after_migrate():
     """Recheck the schema after an app update or framework migration."""
+    cleanup_legacy_modules()
     validate_installation()
+
+
+def cleanup_legacy_modules():
+    """Remove empty module definitions created by pre-consolidation releases."""
+    for module in LEGACY_MODULES:
+        if frappe.db.get_value("Module Def", module, "app_name") != "reckon_real_estate":
+            continue
+        if frappe.db.exists("DocType", {"module": module}):
+            continue
+        frappe.delete_doc("Module Def", module, force=True, ignore_permissions=True)
 
 
 def validate_installation():

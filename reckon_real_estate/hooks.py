@@ -5,6 +5,14 @@ app_description = "Real Estate vertical for ERPNext"
 app_email = "hello@reckon.tech"
 app_license = "MIT"
 
+add_to_apps_screen = [
+    {
+        "name": "reckon_real_estate",
+        "title": "Real Estate",
+        "route": "/app/reckon-real-estate",
+    }
+]
+
 # ERPNext already depends on Frappe, so it is the only app dependency that
 # needs to be declared here.
 required_apps = ["erpnext"]
