@@ -11,6 +11,15 @@
   "sequence_id": 1.0,
   "type": "Workspace",
   "content": "[{\"id\":\"real-estate-header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Real Estate ERP</b></span>\",\"col\":12}},{\"id\":\"total-booked-sales\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Booked Sales\",\"col\":4}},{\"id\":\"total-collections\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Collections\",\"col\":4}},{\"id\":\"outstanding-receivables\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Outstanding Receivables\",\"col\":4}},{\"id\":\"monthly-booked-sales\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Monthly Booked Sales\",\"col\":6}},{\"id\":\"monthly-collections\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Monthly Collections\",\"col\":6}},{\"id\":\"modules-header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Modules</b></span>\",\"col\":12}},{\"id\":\"property-management-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Property Management\",\"col\":4}},{\"id\":\"sales-collections-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Sales and Collections\",\"col\":4}},{\"id\":\"construction-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Construction and Accounting\",\"col\":4}},{\"id\":\"management-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Management BI\",\"col\":4}},{\"id\":\"reports-card\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+  "number_cards": [
+    {"number_card_name": "Total Booked Sales", "label": "Total Booked Sales"},
+    {"number_card_name": "Total Collections", "label": "Total Collections"},
+    {"number_card_name": "Outstanding Receivables", "label": "Outstanding Receivables"}
+  ],
+  "charts": [
+    {"chart_name": "Monthly Booked Sales", "label": "Monthly Booked Sales"},
+    {"chart_name": "Monthly Collections", "label": "Monthly Collections"}
+  ],
   "links": [
     {
       "type": "Card Break",

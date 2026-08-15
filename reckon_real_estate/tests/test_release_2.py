@@ -171,6 +171,12 @@ def test_home_workspace_has_three_cards_and_two_charts_at_the_top():
     assert [item["data"]["chart_name"] for item in content[4:6]] == [
         "Monthly Booked Sales", "Monthly Collections"
     ]
+    assert [row["number_card_name"] for row in workspace["number_cards"]] == [
+        "Total Booked Sales", "Total Collections", "Outstanding Receivables"
+    ]
+    assert [row["chart_name"] for row in workspace["charts"]] == [
+        "Monthly Booked Sales", "Monthly Collections"
+    ]
 
 
 def test_home_analytics_are_installed_during_setup_and_migration():
@@ -184,3 +190,4 @@ def test_home_analytics_are_installed_during_setup_and_migration():
         "Monthly Collections",
     ):
         assert label in install
+    assert "_register_workspace_analytics" in install

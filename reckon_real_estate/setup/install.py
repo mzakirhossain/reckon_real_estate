@@ -186,6 +186,11 @@ def ensure_home_analytics():
             },
         )
 
+    _register_workspace_analytics(
+        [values["label"] for values in number_cards],
+        [values["chart_name"] for values in charts],
+    )
+
 
 def _upsert_analytics_doc(doctype, name, values):
     """Keep an app-owned analytics definition current across migrations."""
@@ -197,6 +202,27 @@ def _upsert_analytics_doc(doctype, name, values):
         return
 
     frappe.get_doc({"doctype": doctype, **values}).insert(ignore_permissions=True)
+
+
+def _register_workspace_analytics(number_cards, charts):
+    """Repair child-table registrations required for workspace widgets to render."""
+    if not frappe.db.exists("Workspace", "Real Estate"):
+        return
+
+    workspace = frappe.get_doc("Workspace", "Real Estate")
+    registered_cards = {row.number_card_name for row in workspace.number_cards}
+    registered_charts = {row.chart_name for row in workspace.charts}
+
+    for name in number_cards:
+        if name not in registered_cards:
+            workspace.append("number_cards", {"number_card_name": name, "label": name})
+    for name in charts:
+        if name not in registered_charts:
+            workspace.append("charts", {"chart_name": name, "label": name})
+
+    workspace.flags.ignore_permissions = True
+    workspace.flags.ignore_links = True
+    workspace.save()
 
 
 def ensure_erpnext_custom_fields():
