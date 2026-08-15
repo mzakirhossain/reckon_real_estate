@@ -17,6 +17,13 @@ REQUIRED_DOCTYPES = (
     "Collection Entry",
     "Payment Allocation",
 )
+ERPNext_MASTER_DOCTYPES = (
+    "Customer",
+    "Company",
+    "Project",
+    "Cost Center",
+    "Item",
+)
 
 
 def _major_version(app_name):
@@ -62,12 +69,20 @@ def after_migrate():
 
 
 def validate_installation():
-    """Return the supported stack details or raise a clear repair action."""
+    """Verify custom schema and the ERPNext masters linked by this app."""
     stack = validate_supported_stack()
     missing = [doctype for doctype in REQUIRED_DOCTYPES if not frappe.db.exists("DocType", doctype)]
     if missing:
         frappe.throw(
             "Reckon Real Estate schema is incomplete. Run `bench --site <site> migrate`. "
             f"Missing DocTypes: {', '.join(missing)}"
+        )
+    missing_erpnext = [
+        doctype for doctype in ERPNext_MASTER_DOCTYPES if not frappe.db.exists("DocType", doctype)
+    ]
+    if missing_erpnext:
+        frappe.throw(
+            "The required ERPNext master DocTypes are unavailable. "
+            f"Missing: {', '.join(missing_erpnext)}"
         )
     return stack

@@ -82,6 +82,12 @@ Release 1 of a Frappe/ERPNext Real Estate vertical.
 The app verifies that Frappe and ERPNext use the same supported major version
 when it is installed or migrated.
 
+## ERPNext integration
+
+Reckon Real Estate keeps its own `Reckon …` modules and custom DocTypes. It
+does not replace ERPNext masters: it links to the existing Customer, Company,
+Project, Cost Center, and Item DocTypes.
+
 ## Installation
 
 ```bash
