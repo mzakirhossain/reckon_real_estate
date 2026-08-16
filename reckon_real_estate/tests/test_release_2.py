@@ -1,4 +1,5 @@
 import json
+import re
 from pathlib import Path
 
 
@@ -214,14 +215,14 @@ def test_installment_aging_report_and_workspace_links_are_registered():
     report_meta = json.loads(
         (report / "installment_due_collection_aging.json").read_text(encoding="utf-8")
     )
-    assert report_meta["name"] == "Installment Due & Collection Aging"
+    assert report_meta["name"] == "Installment Due Collection Aging"
 
     workspace = json.loads(
         (ROOT / "reckon_real_estate" / "workspace" / "real_estate" / "real_estate.json").read_text(encoding="utf-8")
     )
     report_links = {row.get("link_to") for row in workspace["links"] if row.get("link_type") == "Report"}
-    assert "Collection & Overdue" in report_links
-    assert "Installment Due & Collection Aging" in report_links
+    assert "Collection Overdue" in report_links
+    assert "Installment Due Collection Aging" in report_links
 
 
 def test_all_standard_reports_have_frappe_reference_doctypes_and_query_links():
@@ -232,6 +233,8 @@ def test_all_standard_reports_have_frappe_reference_doctypes_and_query_links():
         assert report.get("ref_doctype"), report["name"]
         assert report.get("report_type") == "Script Report", report["name"]
         assert report.get("is_standard") == "Yes", report["name"]
+        module_name = re.sub(r"[\s-]+", "_", report["name"].lower())
+        assert module_name == report_path.parent.name, report["name"]
         report_names.add(report["name"])
 
     workspace = json.loads(

@@ -1,4 +1,4 @@
-frappe.query_reports["Installment Due & Collection Aging"] = {
+frappe.query_reports["Installment Due Collection Aging"] = {
     filters: [
         {fieldname: "customer", label: __("Customer"), fieldtype: "Link", options: "Customer"},
         {fieldname: "project", label: __("Project"), fieldtype: "Link", options: "Real Estate Project"},

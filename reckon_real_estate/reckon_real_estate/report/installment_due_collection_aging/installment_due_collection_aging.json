@@ -1,6 +1,6 @@
 {
   "doctype": "Report",
-  "name": "Installment Due & Collection Aging",
+  "name": "Installment Due Collection Aging",
   "module": "Reckon Real Estate",
   "ref_doctype": "Installment Plan",
   "report_type": "Script Report",

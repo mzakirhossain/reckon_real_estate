@@ -87,6 +87,7 @@ def before_install():
 def after_install():
     """Confirm that app schema sync created every Release 1 DocType."""
     cleanup_legacy_modules()
+    cleanup_legacy_reports()
     ensure_erpnext_custom_fields()
     ensure_home_analytics()
     validate_installation()
@@ -95,6 +96,7 @@ def after_install():
 def after_migrate():
     """Recheck the schema after an app update or framework migration."""
     cleanup_legacy_modules()
+    cleanup_legacy_reports()
     ensure_erpnext_custom_fields()
     ensure_home_analytics()
     validate_installation()
@@ -287,6 +289,17 @@ def cleanup_legacy_modules():
         if frappe.db.exists("DocType", {"module": module}):
             continue
         frappe.delete_doc("Module Def", module, force=True, ignore_permissions=True)
+
+
+def cleanup_legacy_reports():
+    """Remove report records whose names cannot resolve to their app modules."""
+    for report_name in (
+        "Collection & Overdue",
+        "Installment Due & Collection Aging",
+        "Real Estate Project Profitability",
+    ):
+        if frappe.db.exists("Report", report_name):
+            frappe.delete_doc("Report", report_name, force=True, ignore_permissions=True)
 
 
 def validate_installation():

@@ -1,6 +1,6 @@
 {
   "doctype": "Report",
-  "name": "Collection & Overdue",
+  "name": "Collection Overdue",
   "module": "Reckon Real Estate",
   "ref_doctype": "Installment Plan",
   "report_type": "Script Report",
