@@ -1,10 +1,21 @@
 import frappe
 from frappe.model.document import Document
-from frappe.utils import getdate, today, add_months
+from frappe.utils import getdate, today
 
 from reckon_real_estate.construction_workflow import block_if_submitted, require_submitted, set_cancelled_status, set_draft_status, set_submitted_status
 
 class InstallmentPlan(Document):
+    def _status(self, row):
+        if row.outstanding <= 0.01:
+            return "Paid"
+        if frappe.utils.flt(row.paid_amount) > 0:
+            return "Partial"
+        if row.due_date and getdate(row.due_date) < getdate(today()):
+            return "Overdue"
+        if row.due_date and getdate(row.due_date) == getdate(today()):
+            return "Due"
+        return "Upcoming"
+
     def validate(self):
         set_draft_status(self, "plan_no", "document_status")
         agreement = frappe.get_doc("Sales Agreement", self.sales_agreement)
@@ -18,6 +29,8 @@ class InstallmentPlan(Document):
         booking = frappe.get_doc("Property Booking", self.booking)
         if booking.customer != self.customer or booking.project != self.project or booking.unit != self.unit:
             frappe.throw("Booking, Customer, Project and Unit must match.")
+        self.agreement_amount = frappe.utils.flt(agreement.net_contract_value)
+        self.down_payment = frappe.utils.flt(agreement.booking_money)
         for row in self.installments:
             row.total_amount = frappe.utils.flt(row.principal) + frappe.utils.flt(row.other_charges)
             row.outstanding = max(row.total_amount - frappe.utils.flt(row.paid_amount), 0)
@@ -106,17 +119,6 @@ def make_sales_invoice(source_name):
     for row in source.installments:
         frappe.db.set_value("Installment Schedule", row.name, "sales_invoice", invoice.name, update_modified=False)
     return invoice
-
-    def _status(self, row):
-        if row.outstanding <= 0.01:
-            return "Paid"
-        if row.paid_amount > 0:
-            return "Partial"
-        if row.due_date and getdate(row.due_date) < getdate(today()):
-            return "Overdue"
-        if row.due_date and getdate(row.due_date) == getdate(today()):
-            return "Due"
-        return "Upcoming"
 
 def update_all_installment_statuses():
     plans = frappe.get_all("Installment Plan", filters={"docstatus": ["!=", 2]}, pluck="name")

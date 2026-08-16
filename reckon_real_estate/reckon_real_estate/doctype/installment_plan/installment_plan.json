@@ -17,12 +17,14 @@
     "frequency",
     "details_column",
     "number_of_installments",
+    "agreement_amount",
     "down_payment",
     "total_scheduled",
     "status",
     "document_status",
     "sales_invoice",
     "schedule_section",
+    "create_installment_schedule",
     "installments",
     "amended_from"
   ],
@@ -86,10 +88,21 @@
       "reqd": 0
     },
     {
+      "fieldname": "agreement_amount",
+      "fieldtype": "Currency",
+      "label": "Agreement Amount",
+      "read_only": 1,
+      "fetch_from": "sales_agreement.net_contract_value",
+      "fetch_if_empty": 0
+    },
+    {
       "fieldname": "down_payment",
       "fieldtype": "Currency",
       "label": "Down Payment",
-      "reqd": 0
+      "reqd": 0,
+      "read_only": 1,
+      "fetch_from": "sales_agreement.booking_money",
+      "fetch_if_empty": 0
     },
     {
       "fieldname": "total_scheduled",
@@ -134,6 +147,12 @@
       "fieldname": "schedule_section",
       "label": "Installment Schedule",
       "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "create_installment_schedule",
+      "label": "Create Installment Schedule",
+      "fieldtype": "Button",
+      "depends_on": "eval:doc.docstatus === 0"
     },
     {
       "fieldname": "details_section",
