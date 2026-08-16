@@ -26,6 +26,15 @@ REQUIRED_DOCTYPES = (
     "Sales Target",
     "Sales Commission",
     "Sales Agreement",
+    "Land Parcel",
+    "Land Owner",
+    "JV Agreement",
+    "JV Allocation",
+    "Handover",
+    "Snag",
+    "Warranty",
+    "Service Request",
+    "Maintenance",
 )
 ERPNext_MASTER_DOCTYPES = (
     "Customer",

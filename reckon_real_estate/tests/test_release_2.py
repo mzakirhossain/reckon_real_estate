@@ -243,3 +243,46 @@ def test_all_standard_reports_have_frappe_reference_doctypes_and_query_links():
     for link in workspace["links"]:
         if link.get("link_type") == "Report" and link.get("link_to") in report_names:
             assert link.get("is_query_report") == 1, link["link_to"]
+
+
+def test_release_4_land_handover_and_after_sales_schema():
+    base = ROOT / "reckon_real_estate" / "doctype"
+    release_4 = {
+        "land_parcel": ("Land Parcel", True),
+        "land_owner": ("Land Owner", False),
+        "jv_agreement": ("JV Agreement", True),
+        "jv_allocation": ("JV Allocation", True),
+        "handover": ("Handover", True),
+        "snag": ("Snag", False),
+        "warranty": ("Warranty", True),
+        "service_request": ("Service Request", False),
+        "maintenance": ("Maintenance", True),
+    }
+    for folder, (doctype, is_submittable) in release_4.items():
+        meta = json.loads((base / folder / f"{folder}.json").read_text(encoding="utf-8"))
+        assert meta["name"] == doctype
+        assert bool(meta.get("is_submittable")) is is_submittable
+        assert (base / folder / f"{folder}.py").exists()
+
+    unit = json.loads((base / "real_estate_unit" / "real_estate_unit.json").read_text(encoding="utf-8"))
+    unit_fields = {field["fieldname"]: field for field in unit["fields"]}
+    assert unit_fields["land_parcel"]["options"] == "Land Parcel"
+    assert unit_fields["proportionate_land_area"]["read_only"] == 1
+    assert unit_fields["land_share_percent"]["read_only"] == 1
+    assert unit_fields["jv_allocation"]["options"] == "JV Allocation"
+
+
+def test_release_4_doctypes_are_installed_and_linked_from_workspace():
+    install = (ROOT / "setup" / "install.py").read_text(encoding="utf-8")
+    workspace = json.loads(
+        (ROOT / "reckon_real_estate" / "workspace" / "real_estate" / "real_estate.json").read_text(encoding="utf-8")
+    )
+    workspace_doctypes = {
+        row.get("link_to") for row in workspace["links"] if row.get("link_type") == "DocType"
+    }
+    for doctype in (
+        "Land Parcel", "Land Owner", "JV Agreement", "JV Allocation", "Handover",
+        "Snag", "Warranty", "Service Request", "Maintenance",
+    ):
+        assert f'"{doctype}"' in install
+        assert doctype in workspace_doctypes

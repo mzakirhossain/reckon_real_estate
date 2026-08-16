@@ -24,6 +24,11 @@
     "status",
     "document_status",
     "erpnext_item",
+    "land_section",
+    "land_parcel",
+    "proportionate_land_area",
+    "land_share_percent",
+    "jv_allocation",
     "description_section",
     "description",
     "amended_from"
@@ -136,6 +141,37 @@
       "fieldtype": "Text Editor",
       "label": "Description",
       "reqd": 0
+    },
+    {
+      "fieldname": "land_section",
+      "label": "Proportionate Land",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "land_parcel",
+      "label": "Land Parcel",
+      "fieldtype": "Link",
+      "options": "Land Parcel",
+      "read_only": 1
+    },
+    {
+      "fieldname": "proportionate_land_area",
+      "label": "Proportionate Land Area",
+      "fieldtype": "Float",
+      "read_only": 1
+    },
+    {
+      "fieldname": "land_share_percent",
+      "label": "Land Share %",
+      "fieldtype": "Percent",
+      "read_only": 1
+    },
+    {
+      "fieldname": "jv_allocation",
+      "label": "JV Allocation",
+      "fieldtype": "Link",
+      "options": "JV Allocation",
+      "read_only": 1
     },
     {
       "fieldname": "document_status",

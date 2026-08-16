@@ -11,5 +11,9 @@ frappe.ui.form.on("Sales Agreement", {
             };
             frappe.new_doc("Installment Plan");
         }, __("Create"));
+        if (frm.doc.docstatus === 1) frm.add_custom_button(__("Handover"), () => {
+            frappe.route_options = {sales_agreement: frm.doc.name};
+            frappe.new_doc("Handover");
+        }, __("Create"));
     },
 });

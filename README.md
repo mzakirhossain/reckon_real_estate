@@ -104,6 +104,15 @@ for transaction ownership, refunds, reconciliation, and inventory behavior.
 - Property Booking
 - Installment Plan
 - Installment Schedule
+- Land Parcel
+- Land Owner
+- JV Agreement
+- JV Allocation
+- Handover
+- Snag
+- Warranty
+- Service Request
+- Maintenance
 - Collection Entry
 - Payment Allocation
 - Customer Property Ledger
