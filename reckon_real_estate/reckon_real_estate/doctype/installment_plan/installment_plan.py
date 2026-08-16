@@ -126,8 +126,7 @@ def make_collection_entry(source_name, allocation_type="Installment", installmen
     source = frappe.get_doc("Installment Plan", source_name)
     if source.docstatus != 1:
         frappe.throw("Submit the Installment Plan first.")
-    if not source.sales_invoice or frappe.db.get_value("Sales Invoice", source.sales_invoice, "docstatus") != 1:
-        frappe.throw("Create and submit the Sales Invoice first.")
+    invoice = _ensure_submitted_sales_invoice(source)
 
     if allocation_type == "Down Payment":
         collected = frappe.db.sql("""select coalesce(sum(pa.allocated_amount), 0)
@@ -163,10 +162,29 @@ def make_collection_entry(source_name, allocation_type="Installment", installmen
         "allocation_type": allocation_type,
         "installment_plan": source.name,
         "installment_no": installment_no,
-        "sales_invoice": source.sales_invoice,
+        "sales_invoice": invoice.name,
         "allocated_amount": amount,
     })
     return entry
+
+
+def _ensure_submitted_sales_invoice(source):
+    invoice = None
+    if source.sales_invoice and frappe.db.exists("Sales Invoice", source.sales_invoice):
+        invoice = frappe.get_doc("Sales Invoice", source.sales_invoice)
+        if invoice.docstatus == 2:
+            source.db_set("sales_invoice", None)
+            for row in source.installments:
+                frappe.db.set_value("Installment Schedule", row.name, "sales_invoice", None, update_modified=False)
+            invoice = None
+
+    if not invoice:
+        invoice = make_sales_invoice(source.name)
+    if invoice.docstatus == 0:
+        invoice.submit()
+    if invoice.docstatus != 1:
+        frappe.throw("The Sales Invoice could not be submitted.")
+    return invoice
 
 def update_all_installment_statuses():
     plans = frappe.get_all("Installment Plan", filters={"docstatus": ["!=", 2]}, pluck="name")
