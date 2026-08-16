@@ -191,3 +191,34 @@ def test_home_analytics_are_installed_during_setup_and_migration():
     ):
         assert label in install
     assert "_register_workspace_analytics" in install
+
+
+def test_collection_allocations_support_down_payments_and_installments():
+    base = ROOT / "reckon_real_estate" / "doctype"
+    allocation = json.loads(
+        (base / "payment_allocation" / "payment_allocation.json").read_text(encoding="utf-8")
+    )
+    fields = {field["fieldname"]: field for field in allocation["fields"]}
+    assert fields["allocation_type"]["options"] == "Down Payment\nInstallment"
+    assert not fields["installment_no"].get("reqd")
+
+    collection = json.loads(
+        (base / "collection_entry" / "collection_entry.json").read_text(encoding="utf-8")
+    )
+    collection_fields = {field["fieldname"]: field for field in collection["fields"]}
+    assert collection_fields["installment_plan"]["options"] == "Installment Plan"
+
+
+def test_installment_aging_report_and_workspace_links_are_registered():
+    report = ROOT / "reckon_real_estate" / "report" / "installment_due_collection_aging"
+    report_meta = json.loads(
+        (report / "installment_due_collection_aging.json").read_text(encoding="utf-8")
+    )
+    assert report_meta["name"] == "Installment Due & Collection Aging"
+
+    workspace = json.loads(
+        (ROOT / "reckon_real_estate" / "workspace" / "real_estate" / "real_estate.json").read_text(encoding="utf-8")
+    )
+    report_links = {row.get("link_to") for row in workspace["links"] if row.get("link_type") == "Report"}
+    assert "Collection & Overdue" in report_links
+    assert "Installment Due & Collection Aging" in report_links

@@ -23,6 +23,10 @@ def execute(filters=None):
             if r.outstanding > 0 and r.due_date and getdate(r.due_date) < getdate(today()):
                 if filters and filters.get("project") and p.project != filters["project"]:
                     continue
+                if filters and filters.get("customer") and p.customer != filters["customer"]:
+                    continue
+                if filters and filters.get("unit") and p.unit != filters["unit"]:
+                    continue
                 data.append({
                     "plan": p.name, "customer": p.customer, "project": p.project, "unit": p.unit,
                     "installment_no": r.installment_no, "due_date": r.due_date,

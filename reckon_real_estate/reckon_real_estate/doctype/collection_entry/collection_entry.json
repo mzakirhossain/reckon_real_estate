@@ -13,6 +13,7 @@
     "project",
     "unit",
     "booking",
+    "installment_plan",
     "details_column",
     "payment_mode",
     "reference_no",
@@ -74,6 +75,13 @@
       "label": "Booking",
       "reqd": 0,
       "options": "Property Booking"
+    },
+    {
+      "fieldname": "installment_plan",
+      "fieldtype": "Link",
+      "label": "Installment Plan",
+      "options": "Installment Plan",
+      "read_only": 1
     },
     {
       "fieldname": "payment_mode",

@@ -135,8 +135,8 @@
     },
     {
       "type": "Link",
-      "label": "Collection Overdue",
-      "link_to": "Collection Overdue",
+      "label": "Collection & Overdue",
+      "link_to": "Collection & Overdue",
       "link_type": "Report",
       "hidden": 0,
       "link_count": 0,
@@ -153,6 +153,17 @@
       "link_count": 0,
       "onboard": 0,
       "is_query_report": 0,
+      "dependencies": ""
+    },
+    {
+      "type": "Link",
+      "label": "Installment Due & Collection Aging",
+      "link_to": "Installment Due & Collection Aging",
+      "link_type": "Report",
+      "hidden": 0,
+      "link_count": 0,
+      "onboard": 0,
+      "is_query_report": 1,
       "dependencies": ""
     },
     {"type":"Card Break","label":"Construction and Accounting","hidden":0,"link_count":0,"onboard":0,"is_query_report":0},

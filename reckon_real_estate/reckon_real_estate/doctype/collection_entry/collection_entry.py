@@ -21,10 +21,12 @@ class CollectionEntry(Document):
                 frappe.throw("Booking, Customer, Project and Unit must match.")
 
         total = 0
+        plan_names = set()
         for row in self.allocations:
             if row.allocated_amount <= 0:
                 frappe.throw("Allocated amount must be greater than zero.")
             plan = frappe.get_doc("Installment Plan", row.installment_plan)
+            plan_names.add(plan.name)
             if plan.customer != self.customer or plan.project != self.project or plan.unit != self.unit:
                 frappe.throw(f"Installment Plan {row.installment_plan} does not belong to this customer/project/unit.")
             if not plan.sales_invoice:
@@ -32,6 +34,19 @@ class CollectionEntry(Document):
             if frappe.db.get_value("Sales Invoice", plan.sales_invoice, "docstatus") != 1:
                 frappe.throw(f"Sales Invoice {plan.sales_invoice} must be submitted first.")
             row.sales_invoice = plan.sales_invoice
+            if row.allocation_type == "Down Payment":
+                already_collected = frappe.db.sql("""select coalesce(sum(pa.allocated_amount), 0)
+                    from `tabPayment Allocation` pa
+                    join `tabCollection Entry` ce on ce.name=pa.parent
+                    where pa.installment_plan=%s and pa.allocation_type='Down Payment'
+                    and ce.docstatus=1 and ce.name!=%s""", (plan.name, self.name))[0][0]
+                available = max(frappe.utils.flt(plan.down_payment) - frappe.utils.flt(already_collected), 0)
+                if row.allocated_amount > available + 0.01:
+                    frappe.throw(f"Allocation exceeds remaining down payment ({available:,.2f}).")
+                total += frappe.utils.flt(row.allocated_amount)
+                continue
+            if not row.installment_no:
+                frappe.throw("Installment No is required for an installment allocation.")
             target = next((x for x in plan.installments if int(x.installment_no) == int(row.installment_no)), None)
             if not target:
                 frappe.throw(f"Installment {row.installment_no} does not exist in Plan {row.installment_plan}.")
@@ -44,9 +59,12 @@ class CollectionEntry(Document):
             require_submitted("Property Booking", self.booking)
 
         self.allocated_amount = total
+        self.installment_plan = next(iter(plan_names)) if len(plan_names) == 1 else None
         if total > frappe.utils.flt(self.amount) + 0.01:
             frappe.throw("Total allocation cannot exceed Collection Amount.")
         self.unallocated_amount = max(frappe.utils.flt(self.amount) - total, 0)
+        if self.unallocated_amount > 0.01:
+            frappe.throw("Allocate the full Collection Amount before saving.")
 
     def on_submit(self):
         self._make_payment_entry()
@@ -118,6 +136,7 @@ class CollectionEntry(Document):
             "real_estate_booking": self.booking,
             "real_estate_unit": self.unit,
             "real_estate_project": self.project,
+            "installment_plan": self.installment_plan,
         }.items():
             if payment.meta.has_field(fieldname):
                 payment.set(fieldname, value)
@@ -130,6 +149,8 @@ class CollectionEntry(Document):
     def _apply_allocations(self, reverse=False):
         multiplier = -1 if reverse else 1
         for row in self.allocations:
+            if row.allocation_type == "Down Payment":
+                continue
             plan = frappe.get_doc("Installment Plan", row.installment_plan)
             target = next(x for x in plan.installments if int(x.installment_no) == int(row.installment_no))
             target.paid_amount = max(frappe.utils.flt(target.paid_amount) + multiplier * frappe.utils.flt(row.allocated_amount), 0)

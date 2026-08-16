@@ -243,6 +243,7 @@ def ensure_erpnext_custom_fields():
             {**common, "fieldname": "real_estate_booking", "label": "Property Booking", "fieldtype": "Link", "options": "Property Booking"},
             {**common, "fieldname": "real_estate_unit", "label": "Real Estate Unit", "fieldtype": "Link", "options": "Real Estate Unit"},
             {**common, "fieldname": "real_estate_project", "label": "Real Estate Project", "fieldtype": "Link", "options": "Real Estate Project"},
+            {**common, "fieldname": "installment_plan", "label": "Installment Plan", "fieldtype": "Link", "options": "Installment Plan"},
         ],
         "Purchase Order": [
             {**common, "fieldname": "contractor_work_order", "label": "Contractor Work Order", "fieldtype": "Link", "options": "Contractor Work Order"},

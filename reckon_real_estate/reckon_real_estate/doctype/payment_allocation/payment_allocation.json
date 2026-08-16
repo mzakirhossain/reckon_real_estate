@@ -6,6 +6,7 @@
   "allow_rename": 1,
   "engine": "InnoDB",
   "field_order": [
+    "allocation_type",
     "installment_plan",
     "installment_no",
     "sales_invoice",
@@ -13,21 +14,31 @@
   ],
   "fields": [
     {
+      "fieldname": "allocation_type",
+      "fieldtype": "Select",
+      "label": "Allocation Type",
+      "options": "Down Payment\nInstallment",
+      "default": "Installment",
+      "reqd": 1,
+      "in_list_view": 1,
+      "columns": 2
+    },
+    {
       "fieldname": "installment_plan",
       "fieldtype": "Link",
       "label": "Installment Plan",
       "reqd": 1,
       "options": "Installment Plan",
       "in_list_view": 1,
-      "columns": 3
+      "columns": 2
     },
     {
       "fieldname": "installment_no",
       "fieldtype": "Int",
       "label": "Installment No",
-      "reqd": 1,
+      "reqd": 0,
       "in_list_view": 1,
-      "columns": 2
+      "columns": 1
     },
     {
       "fieldname": "allocated_amount",

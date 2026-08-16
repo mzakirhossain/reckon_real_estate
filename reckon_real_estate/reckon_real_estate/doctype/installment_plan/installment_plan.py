@@ -120,6 +120,54 @@ def make_sales_invoice(source_name):
         frappe.db.set_value("Installment Schedule", row.name, "sales_invoice", invoice.name, update_modified=False)
     return invoice
 
+
+@frappe.whitelist()
+def make_collection_entry(source_name, allocation_type="Installment", installment_no=None):
+    source = frappe.get_doc("Installment Plan", source_name)
+    if source.docstatus != 1:
+        frappe.throw("Submit the Installment Plan first.")
+    if not source.sales_invoice or frappe.db.get_value("Sales Invoice", source.sales_invoice, "docstatus") != 1:
+        frappe.throw("Create and submit the Sales Invoice first.")
+
+    if allocation_type == "Down Payment":
+        collected = frappe.db.sql("""select coalesce(sum(pa.allocated_amount), 0)
+            from `tabPayment Allocation` pa
+            join `tabCollection Entry` ce on ce.name=pa.parent
+            where pa.installment_plan=%s and pa.allocation_type='Down Payment' and ce.docstatus=1""",
+            source.name)[0][0]
+        amount = max(frappe.utils.flt(source.down_payment) - frappe.utils.flt(collected), 0)
+        if amount <= 0.01:
+            frappe.throw("The down payment is already fully collected.")
+        installment_no = None
+    else:
+        if not installment_no:
+            frappe.throw("Select an installment.")
+        row = next((row for row in source.installments if int(row.installment_no) == int(installment_no)), None)
+        if not row:
+            frappe.throw(f"Installment {installment_no} does not exist.")
+        amount = frappe.utils.flt(row.outstanding)
+        if amount <= 0.01:
+            frappe.throw(f"Installment {installment_no} is already fully paid.")
+
+    entry = frappe.new_doc("Collection Entry")
+    entry.update({
+        "customer": source.customer,
+        "project": source.project,
+        "unit": source.unit,
+        "booking": source.booking,
+        "installment_plan": source.name,
+        "collection_date": today(),
+        "amount": amount,
+    })
+    entry.append("allocations", {
+        "allocation_type": allocation_type,
+        "installment_plan": source.name,
+        "installment_no": installment_no,
+        "sales_invoice": source.sales_invoice,
+        "allocated_amount": amount,
+    })
+    return entry
+
 def update_all_installment_statuses():
     plans = frappe.get_all("Installment Plan", filters={"docstatus": ["!=", 2]}, pluck="name")
     for name in plans:
