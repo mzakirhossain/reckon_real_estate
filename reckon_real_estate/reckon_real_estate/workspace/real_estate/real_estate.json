@@ -130,7 +130,7 @@
       "hidden": 0,
       "link_count": 0,
       "onboard": 0,
-      "is_query_report": 0,
+      "is_query_report": 1,
       "dependencies": ""
     },
     {
@@ -141,7 +141,7 @@
       "hidden": 0,
       "link_count": 0,
       "onboard": 0,
-      "is_query_report": 0,
+      "is_query_report": 1,
       "dependencies": ""
     },
     {
@@ -152,7 +152,7 @@
       "hidden": 0,
       "link_count": 0,
       "onboard": 0,
-      "is_query_report": 0,
+      "is_query_report": 1,
       "dependencies": ""
     },
     {

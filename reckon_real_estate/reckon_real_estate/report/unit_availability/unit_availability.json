@@ -2,6 +2,8 @@
   "doctype": "Report",
   "name": "Unit Availability",
   "module": "Reckon Real Estate",
+  "ref_doctype": "Real Estate Unit",
   "report_type": "Script Report",
-  "is_standard": "Yes"
+  "is_standard": "Yes",
+  "roles": [{"role": "System Manager"}]
 }

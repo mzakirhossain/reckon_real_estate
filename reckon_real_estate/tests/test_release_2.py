@@ -222,3 +222,21 @@ def test_installment_aging_report_and_workspace_links_are_registered():
     report_links = {row.get("link_to") for row in workspace["links"] if row.get("link_type") == "Report"}
     assert "Collection & Overdue" in report_links
     assert "Installment Due & Collection Aging" in report_links
+
+
+def test_all_standard_reports_have_frappe_reference_doctypes_and_query_links():
+    reports_root = ROOT / "reckon_real_estate" / "report"
+    report_names = set()
+    for report_path in reports_root.glob("*/*.json"):
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+        assert report.get("ref_doctype"), report["name"]
+        assert report.get("report_type") == "Script Report", report["name"]
+        assert report.get("is_standard") == "Yes", report["name"]
+        report_names.add(report["name"])
+
+    workspace = json.loads(
+        (ROOT / "reckon_real_estate" / "workspace" / "real_estate" / "real_estate.json").read_text(encoding="utf-8")
+    )
+    for link in workspace["links"]:
+        if link.get("link_type") == "Report" and link.get("link_to") in report_names:
+            assert link.get("is_query_report") == 1, link["link_to"]
